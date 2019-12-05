@@ -14,7 +14,7 @@
 
   async function connect() {
     hub = new GameHub(
-      "http://localhost:5000/game?user=" + userName,
+      "https://puertorico.azurewebsites.net/game?user=" + userName,
       true,
       LogLevel.Debug
     );
