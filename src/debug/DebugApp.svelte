@@ -1,5 +1,5 @@
 <script>
-  import ActionEditor from "./JsonEditor.svelte";
+  import ActionEditor from "./ActionEditor.svelte";
   import JSONEditor from "jsoneditor";
   import { LogLevel } from "@microsoft/signalr";
   import { onMount } from "svelte";
@@ -22,21 +22,24 @@
     Object.keys(EventType).forEach(k =>
       hub.connection.on(k, ev => console.log(ev))
     );
+
     hub.connection.on(EventType.GameCreated, ev => {
       gameId = ev.gameId;
-      players.push(ev.createdBy);
-      players = players;
+      players = ev.players;
     });
+
     hub.connection.on(EventType.PlayerJoined, ev => {
       players.push(ev.player);
       players = players;
     });
+
     hub.connection.on(EventType.GameChanged, ev => {
       game = ev.game;
       gameId = ev.game.id;
     });
-    connectionState = "Connected";
-    hub.connection.onclose(() => (connectionState = "Closed"));
+
+    setInterval(() => connectionState = hub.connection.connectionState, 1000);
+    hub.connection.onclose(err => console.error(err));
   }
 
   let connectionState = "Disconnected";
@@ -58,6 +61,7 @@
   .horizontalPanel {
     height: 100%;
     width: 40%;
+    vertical-align: top;
     display: inline-block;
   }
 </style>

@@ -56,6 +56,16 @@ export const EventType = {
 };
 
 export const CommandType = {
+    SelectRole: "SelectRole",
+    EndPhase: "EndPhase",
     Build: "Build",
-    // TODO: define command types
+    TakePlantation: "TakePlantation",
+    TakeQuarry: "TakeQuarry",
+    TakeRandomPlantation: "TakeRandomPlantation",
+    BonusProduction: "BonusProduction",
+    SellGood: "SellGood",
+    DeliverGoods: "DeliverGoods",
+    UseWharf: "UseWharf",
+    StoreGoods: "StoreGoods",
+    MoveColonist: "MoveColonist",
 }

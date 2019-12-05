@@ -1,19 +1,14 @@
 <script>
   import JSONEditor from "jsoneditor";
   import { onMount } from "svelte";
-  import actions from "./gameActions";
+  import cmds from "./gameActions";
 
   export let gameHub;
   export let gameId = "";
   export let options = {
     mode: "code"
   };
-  const init = {
-    gameId,
-    action: {
-      actionType: ""
-    }
-  };
+  const init = {};
 
   let container;
   let editor;
@@ -25,21 +20,17 @@
 
   async function send() {
     const data = editor.get();
-    await gameHub.sendCommand(data.action.actionType, gameId, data.action);
+    await gameHub.sendCommand(selectedCmd.cmd, gameId, data);
   }
 
-  let selectedAction;
+  let selectedCmd;
 
-  $: editor &&
-    editor.set({
-      gameId,
-      action: selectedAction
-    });
+  $: editor && editor.set(selectedCmd.data);
 </script>
 
-<select bind:value={selectedAction}>
-  {#each actions as action}
-    <option value={action}>{action.actionType}</option>
+<select bind:value={selectedCmd}>
+  {#each cmds as command}
+    <option value={command}>{command.cmd}</option>
   {/each}
 </select>
 <div bind:this={container} />
