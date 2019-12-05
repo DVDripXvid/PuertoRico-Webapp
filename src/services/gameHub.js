@@ -69,4 +69,5 @@ export const CommandType = {
     UseWharf: "UseWharf",
     StoreGoods: "StoreGoods",
     MoveColonist: "MoveColonist",
+    PlaceColonist: "PlaceColonist",
 }

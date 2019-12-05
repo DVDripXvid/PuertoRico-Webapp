@@ -27,6 +27,13 @@ const commands = [
         }
     },
     {
+        cmd: CommandType.PlaceColonist,
+        data: {
+            toIndex: 0,
+            isPlaceToTile: true,
+        }
+    },
+    {
         cmd: CommandType.SellGood,
         data: { goodType: "Corn" }
     },
