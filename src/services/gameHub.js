@@ -53,6 +53,7 @@ export const EventType = {
     PlayerLeft: "PlayerLeft",
     GameStarted: "GameStarted",
     GameChanged: "GameChanged",
+    Error: "Error",
 };
 
 export const CommandType = {

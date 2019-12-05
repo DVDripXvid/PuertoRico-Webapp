@@ -38,6 +38,8 @@
       gameId = ev.game.id;
     });
 
+    hub.connection.on(EventType.Error, ev => alert(ev.errorMessage));
+
     setInterval(() => connectionState = hub.connection.connectionState, 1000);
     hub.connection.onclose(err => console.error(err));
   }
