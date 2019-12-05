@@ -24,8 +24,14 @@
     await gameHub.sendCommand(selectedCmd.cmd, gameId, data);
   }
 
-  let availableCmds = cmds.filter(c => availableActionTypes.includes(c.cmd));
   let selectedCmd;
+  let availableCmds = [];
+  $: { 
+    availableCmds = cmds.filter(c => availableActionTypes.includes(c.cmd));
+    if(availableCmds.length === 1){
+      selectedCmd = availableCmds[0];
+    }
+  }
 
   $: editor && selectedCmd && editor.set(selectedCmd.data);
 </script>

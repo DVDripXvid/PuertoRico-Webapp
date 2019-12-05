@@ -1,11 +1,14 @@
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { sessionStore } from "./stores";
 
 export default class {
     constructor(url, waitForResp, logLevel) {
         this.waitForResp = waitForResp;
         logLevel = logLevel || LogLevel.Information;
+        this.token = "";
+        sessionStore.subscribe(val => this.token = val.token);
         this.connection = new HubConnectionBuilder()
-            .withUrl(url)
+            .withUrl(url, { accessTokenFactory: () => this.token })
             .configureLogging(logLevel)
             .build();
 
