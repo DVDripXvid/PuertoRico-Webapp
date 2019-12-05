@@ -5,12 +5,13 @@
   import { onMount } from "svelte";
   import GameHub, { EventType } from "../services/gameHub";
 
-  let userName;
+  let userName = "";
   let hub;
   let gameId;
   let gameName;
   let players = [];
   let game;
+  let availableActionTypes = [];
 
   async function connect() {
     hub = new GameHub(
@@ -38,9 +39,14 @@
       gameId = ev.game.id;
     });
 
+    hub.connection.on(
+      EventType.AvailableActionTypesChanged,
+      ev => (availableActionTypes = ev.actionTypes)
+    );
+
     hub.connection.on(EventType.Error, ev => alert(ev.errorMessage));
 
-    setInterval(() => connectionState = hub.connection.connectionState, 1000);
+    setInterval(() => (connectionState = hub.connection.connectionState), 1000);
     hub.connection.onclose(err => console.error(err));
   }
 
@@ -70,7 +76,7 @@
 
 {#if game}
   <div class="horizontalPanel">
-    <ActionEditor gameHub={hub} {gameId} />
+    <ActionEditor gameHub={hub} {gameId} {availableActionTypes} />
   </div>
 {:else}
   <div>
@@ -93,3 +99,7 @@
   </div>
 {/if}
 <div bind:this={container} class="horizontalPanel" />
+
+<svelte:head>
+  <title>{userName}</title>
+</svelte:head>

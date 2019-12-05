@@ -5,6 +5,7 @@
 
   export let gameHub;
   export let gameId = "";
+  export let availableActionTypes = [];
   export let options = {
     mode: "code"
   };
@@ -23,13 +24,14 @@
     await gameHub.sendCommand(selectedCmd.cmd, gameId, data);
   }
 
+  let availableCmds = cmds.filter(c => availableActionTypes.includes(c.cmd));
   let selectedCmd;
 
-  $: editor && editor.set(selectedCmd.data);
+  $: editor && selectedCmd && editor.set(selectedCmd.data);
 </script>
 
 <select bind:value={selectedCmd}>
-  {#each cmds as command}
+  {#each availableCmds as command}
     <option value={command}>{command.cmd}</option>
   {/each}
 </select>
