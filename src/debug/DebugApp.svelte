@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
   import GameHub, { EventType } from "../services/gameHub";
   import { sessionStore } from "../services/stores";
+  import UserProfile from "../components/Player.svelte";
 
   let hub;
   let gameId;
@@ -14,7 +15,11 @@
   let availableActionTypes = [];
   let connectionState = "Disconnected";
 
-  hub = new GameHub("https://puertorico.azurewebsites.net/game", true, LogLevel.Debug);
+  hub = new GameHub(
+    "https://puertorico.azurewebsites.net/game",
+    true,
+    LogLevel.Debug
+  );
 
   Object.keys(EventType).forEach(k =>
     hub.connection.on(k, ev => console.log(ev))
@@ -66,6 +71,8 @@
     display: inline-block;
   }
 </style>
+
+<UserProfile userName={$sessionStore.name} imageUrl={$sessionStore.imageUrl} />
 
 {#if game}
   <div class="horizontalPanel">
