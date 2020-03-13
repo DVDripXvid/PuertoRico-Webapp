@@ -5,7 +5,7 @@
   import { onMount } from "svelte";
   import GameHub, { EventType } from "../services/gameHub";
   import { sessionStore } from "../services/stores";
-  import UserProfile from "../components/Player.svelte";
+  import UserProfile from "../components/PlayerProfile.svelte";
 
   let hub;
   let gameId;
