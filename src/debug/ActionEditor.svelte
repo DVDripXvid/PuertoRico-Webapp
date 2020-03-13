@@ -26,9 +26,9 @@
 
   let selectedCmd;
   let availableCmds = [];
-  $: { 
+  $: {
     availableCmds = cmds.filter(c => availableActionTypes.includes(c.cmd));
-    if(availableCmds.length === 1){
+    if (availableCmds.length === 1) {
       selectedCmd = availableCmds[0];
     }
   }
