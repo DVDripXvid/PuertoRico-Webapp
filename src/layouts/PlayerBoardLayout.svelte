@@ -14,7 +14,7 @@
                   <RandomColor />
                 </slot>
               </div>
-              <div class="flex-initial">
+              <div class="flex-initial w-48">
                 <slot name="playerProfile">
                   <RandomColor />
                 </slot>
