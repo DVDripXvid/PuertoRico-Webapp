@@ -8,7 +8,7 @@
       token: resp.id_token,
       name: profile.getName(),
       email: profile.getEmail(),
-      imageUrl: profile.getImageUrl(),
+      imageUrl: profile.getImageUrl() + "?sz=512",
       id: profile.getId(),
     }
     sessionStore.set(session);
