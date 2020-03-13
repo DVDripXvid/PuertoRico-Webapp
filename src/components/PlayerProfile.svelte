@@ -5,12 +5,11 @@
 
 <style>
   .nameText {
-    font-size: 50%;
+    font-size: 70%;
   }
 
   .textPath {
     fill: none;
-    stroke: #454545;
   }
 
   .userImage {
@@ -81,7 +80,7 @@
         <path
           id="textPath"
           class="textPath"
-          d="M34,170 C77,160 110,160 134,170" />
+          d="M37.31,161.55s64.42-8.89,109.11.81" />
         <text class="nameText">
           <textPath href="#textPath">{userName}</textPath>
         </text>
