@@ -3,11 +3,12 @@
   import DebugApp from "./debug/DebugApp.svelte";
   import SignInBtn from "./auth/GoogleSignIn.svelte";
   import { sessionStore } from "./services/stores";
-  import PlayerBoard from "./containers/PlayerBoard.svelte";
+
+  import GameBoard from "./containers/GameBoard.svelte";
 </script>
 
 <Tailwindcss />
-<PlayerBoard />
+<GameBoard />
 <!--main>
   {#if $sessionStore.token}
     <DebugApp />
