@@ -7,8 +7,8 @@
     <div class="h-full flex flex-row">
       <div class="flex-auto">
         <div class="h-full flex flex-col">
-          <div class="flex-auto">
-            <div class="h-full flex flex-row">
+          <div class="flex-1">
+            <div class="h-full flex flex-row m-3">
               <div class="flex-auto">
                 <slot name="playerTiles">
                   <RandomColor />
@@ -22,7 +22,7 @@
             </div>
             <div />
           </div>
-          <div class="flex-auto">
+          <div class="flex-1 m-3">
             <slot name="playerBuildings">
               <RandomColor />
             </slot>
