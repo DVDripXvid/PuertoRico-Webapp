@@ -1,6 +1,10 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'portrait': { 'raw': '(orientation: portrait)' },
+      }
+    },
   },
   variants: {},
   plugins: [],
