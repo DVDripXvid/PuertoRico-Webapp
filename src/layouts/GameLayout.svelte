@@ -12,7 +12,7 @@
     <div class="h-full flex flex-row portrait:flex-col">
       <div class="flex-1">
         <div class="h-full flex flex-row">
-          <div class="flex-initial w-10">
+          <div class="flex-initial w-1/20">
             <slot name="roleSelector">
               <RandomColor />
             </slot>
