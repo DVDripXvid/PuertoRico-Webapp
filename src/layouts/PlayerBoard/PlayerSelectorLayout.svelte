@@ -4,7 +4,7 @@
   export let players = [];
 </script>
 
-<div class="h-full flex flex-col">
+<div class="h-full flex flex-col py-1">
   {#each players as player}
     <div class="flex-1 my-1">
       <slot>
