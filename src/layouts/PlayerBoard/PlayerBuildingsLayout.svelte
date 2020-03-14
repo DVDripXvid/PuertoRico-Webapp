@@ -17,7 +17,7 @@
   }
 </script>
 
-<div class={`h-full grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
+<div class={`${items.length == 0 ? "h-full" : ""} grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
   {#each buildingsGrid as row}
     {#each row as building}
       <div class="row-auto col-auto m-2">

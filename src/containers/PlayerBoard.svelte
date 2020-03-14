@@ -2,8 +2,11 @@
   import Layout from "../layouts/PlayerBoardLayout.svelte";
   import PlayerTilesLayout from "../layouts/PlayerBoard/PlayerTilesLayout.svelte";
   import PlayerBuildingLayout from "../layouts/PlayerBoard/PlayerBuildingsLayout.svelte";
-  import PlayerSelectorLayout from "../layouts/PlayerBoard/PlayerSelectorLayout.svelte";
+  import PlayerTabsLayout from "../layouts/PlayerBoard/PlayerTabsLayout.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
+  import SmallIndigoPlant from "../components/buildings/SmallIndigoPlant.svelte";
+
+  import { sessionStore } from "../services/stores.js";
 </script>
 
 <div
@@ -11,16 +14,30 @@
   style="background-image: url(./img/board.jpg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
-      <PlayerProfile />
+      <PlayerProfile
+        userName={$sessionStore.name}
+        imageUrl={$sessionStore.imageUrl} />
     </div>
     <div class="h-full" slot="playerTiles">
-      <PlayerTilesLayout />
+      <PlayerTilesLayout let:prop={tile}>
+        {#if tile.type}
+          <div>{tile.type}</div>
+        {:else}
+          <div class="h-full bg-beige opacity-75" />
+        {/if}
+      </PlayerTilesLayout>
     </div>
     <div class="h-full" slot="playerBuildings">
-      <PlayerBuildingLayout />
+      <PlayerBuildingLayout items={[{type: 'SmallIndigoPlant'}]} let:prop={building}>
+        {#if building.type}
+          <SmallIndigoPlant />
+        {:else}
+          <div class="h-full bg-beige opacity-75" />
+        {/if}
+      </PlayerBuildingLayout>
     </div>
     <div class="h-full" slot="playerSelector">
-      <PlayerSelectorLayout players={[...Array(4).keys()]} />
+      <PlayerTabsLayout players={[...Array(4).keys()]} />
     </div>
   </Layout>
 </div>
