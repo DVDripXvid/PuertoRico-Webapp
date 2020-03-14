@@ -5,14 +5,19 @@
   import { sessionStore } from "./services/stores";
 
   import GameBoard from "./containers/GameBoard.svelte";
+
+  import LoginPage from "./pages/LoginPage.svelte";
+  import LobbyPage from "./pages/LobbyPage.svelte";
 </script>
 
 <Tailwindcss />
-<GameBoard />
-<!--main>
-  {#if $sessionStore.token}
-    <DebugApp />
+
+{#if $sessionStore.token}
+  {#if $sessionStore.currentGame}
+    <GameBoard />
   {:else}
-    <SignInBtn />
+    <LobbyPage />
   {/if}
-</main-->
+{:else}
+  <LoginPage />
+{/if}

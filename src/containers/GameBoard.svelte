@@ -1,7 +1,7 @@
 <script>
   import GameLayout from "../layouts/GameLayout.svelte";
   import PlayerBoard from "./PlayerBoard.svelte";
-  import RoleSelectorLayout from "../layouts/RoleSelectorLayout.svelte";
+  import RoleTabsLayout from "../layouts/RoleTabsLayout.svelte";
 </script>
 
 <GameLayout>
@@ -9,6 +9,6 @@
     <PlayerBoard />
   </div>
   <div class="h-full" slot="roleSelector">
-    <RoleSelectorLayout roles={[...Array(7).keys()]} />
+    <RoleTabsLayout roles={[...Array(7).keys()]} />
   </div>
 </GameLayout>
