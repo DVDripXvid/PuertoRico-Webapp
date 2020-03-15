@@ -19,6 +19,9 @@ module.exports = {
       default: '#132b40',
     },
     extend: {
+      spacing: {
+        'px-2': '2px', 
+      },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
       },

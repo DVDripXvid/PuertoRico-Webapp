@@ -13,9 +13,20 @@
   .filledSlot {
     @apply fill-current stroke-current text-primary;
   }
+  .selected {
+    @apply border-2 border-dashed border-primary;
+  }
+  .unselected {
+    @apply border-none m-px-2;
+  }
 </style>
 
-<div transition:fade={{ duration: 1000 }} style={`background: url(${imgUrl})`}>
+<div
+  on:click
+  class:selected={building.selected}
+  class:unselected={!building.selected}
+  transition:fade={{ duration: 1000 }}
+  style={`background: url(${imgUrl})`}>
   <svg viewBox="0 0 128.93 85.34">
     <circle
       class:filledSlot={building.workerCount >= 1}
