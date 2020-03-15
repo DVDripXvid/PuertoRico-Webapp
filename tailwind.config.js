@@ -19,17 +19,18 @@ module.exports = {
       default: '#132b40',
     },
     extend: {
+      spacing: {
+        'px-2': '2px', 
+      },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
       },
       width: {
         '1/20': '5%',
       },
-      /*fill: theme => ({
-        'ribbon': theme('colors.ribbon'),
-        'ribbon-lighter': theme('colors.ribbon.lighter'),
-        'ribbon-darker': theme('colors.ribbon.darker'),
-      })*/
+      fontFamily: {
+        'californian': ['CalifornianFB-Bold', 'Californian FB'],
+      }
     },
   },
   variants: {},
