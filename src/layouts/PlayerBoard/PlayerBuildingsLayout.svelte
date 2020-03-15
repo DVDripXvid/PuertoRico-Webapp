@@ -1,23 +1,30 @@
 <script>
   import RandomColor from "../../components/RandomColor.svelte";
 
-  export let items = [];
+  export let buildings = [];
 
   const columnCount = 4;
   const rowCount = 3;
 
-  const buildingsGrid = [];
+  let buildingsGrid = [];
+  $: buildingsGrid = genereateGrid(buildings);
 
-  for (let i = 0; i <= rowCount * columnCount; i += columnCount) {
-    let rowItems = items.slice(i, columnCount);
-    while (rowItems.length < columnCount) {
-      rowItems.push({});
+  function genereateGrid(items) {
+    const buildingsGrid = [];
+
+    for (let i = 0; i <= rowCount * columnCount; i += columnCount) {
+      let rowItems = items.slice(i, columnCount);
+      while (rowItems.length < columnCount) {
+        rowItems.push({});
+      }
+      buildingsGrid.push(rowItems);
     }
-    buildingsGrid.push(rowItems);
+    return buildingsGrid;
   }
 </script>
 
-<div class={`${items.length == 0 ? "h-full" : ""} grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
+<div
+  class={`${buildings.length == 0 ? 'h-full' : ''} grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
   {#each buildingsGrid as row}
     {#each row as building}
       <div class="row-auto col-auto m-2">
