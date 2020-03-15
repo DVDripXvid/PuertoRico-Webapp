@@ -1,12 +1,14 @@
 <script>
   import Layout from "../layouts/PlayerBoardLayout.svelte";
   import PlayerTilesLayout from "../layouts/PlayerBoard/PlayerTilesLayout.svelte";
-  import PlayerBuildingLayout from "../layouts/PlayerBoard/PlayerBuildingsLayout.svelte";
   import PlayerTabsLayout from "../layouts/PlayerBoard/PlayerTabsLayout.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
-  import SmallIndigoPlant from "../components/buildings/SmallIndigoPlant.svelte";
+
+  import PlayerBuildings from "./playerBoard/PlayerBuildings.svelte";
 
   import { sessionStore } from "../services/stores.js";
+
+  
 </script>
 
 <div
@@ -20,21 +22,15 @@
     </div>
     <div class="h-full" slot="playerTiles">
       <PlayerTilesLayout let:prop={tile}>
-        {#if tile.type}
-          <div>{tile.type}</div>
+        {#if tile.name}
+          <div>{tile.name}</div>
         {:else}
           <div class="h-full bg-beige opacity-75" />
         {/if}
       </PlayerTilesLayout>
     </div>
     <div class="h-full" slot="playerBuildings">
-      <PlayerBuildingLayout items={[{type: 'SmallIndigoPlant'}]} let:prop={building}>
-        {#if building.type}
-          <SmallIndigoPlant />
-        {:else}
-          <div class="h-full bg-beige opacity-75" />
-        {/if}
-      </PlayerBuildingLayout>
+      <PlayerBuildings />
     </div>
     <div class="h-full" slot="playerSelector">
       <PlayerTabsLayout players={[...Array(4).keys()]} />

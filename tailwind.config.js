@@ -25,11 +25,9 @@ module.exports = {
       width: {
         '1/20': '5%',
       },
-      /*fill: theme => ({
-        'ribbon': theme('colors.ribbon'),
-        'ribbon-lighter': theme('colors.ribbon.lighter'),
-        'ribbon-darker': theme('colors.ribbon.darker'),
-      })*/
+      fontFamily: {
+        'californian': ['CalifornianFB-Bold', 'Californian FB'],
+      }
     },
   },
   variants: {},
