@@ -3,12 +3,26 @@
   import PlayerTilesLayout from "../layouts/PlayerBoard/PlayerTilesLayout.svelte";
   import PlayerTabsLayout from "../layouts/PlayerBoard/PlayerTabsLayout.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
+  import PlayerTab from "../components/PlayerTab.svelte";
 
   import PlayerBuildings from "./playerBoard/PlayerBuildings.svelte";
+  import PlayerTiles from "./playerBoard/PlayerTiles.svelte";
 
-  import { sessionStore } from "../services/stores.js";
+  import { sessionStore } from "../services/stores";
 
-  
+  export let players = [
+    {
+      name: "Béla"
+    },
+    {
+      name: "Lajos"
+    },
+    {
+      name: "László"
+    }
+  ];
+
+  let selectedPlayer = players[0];
 </script>
 
 <div
@@ -16,24 +30,24 @@
   style="background-image: url(./img/board.jpg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
-      <PlayerProfile
-        userName={$sessionStore.name}
-        imageUrl={$sessionStore.imageUrl} />
+      <PlayerProfile userName={selectedPlayer.name} />
     </div>
     <div class="h-full" slot="playerTiles">
-      <PlayerTilesLayout let:prop={tile}>
-        {#if tile.name}
-          <div>{tile.name}</div>
-        {:else}
-          <div class="h-full bg-beige opacity-75" />
-        {/if}
-      </PlayerTilesLayout>
+      <PlayerTiles />
     </div>
     <div class="h-full" slot="playerBuildings">
       <PlayerBuildings />
     </div>
     <div class="h-full" slot="playerSelector">
-      <PlayerTabsLayout players={[...Array(4).keys()]} />
+      <PlayerTabsLayout {players} let:prop={player}>
+        {#if player === selectedPlayer}
+          <div />
+        {:else}
+          <PlayerTab
+            on:click={() => (selectedPlayer = player)}
+            userName={player.name} />
+        {/if}
+      </PlayerTabsLayout>
     </div>
   </Layout>
 </div>

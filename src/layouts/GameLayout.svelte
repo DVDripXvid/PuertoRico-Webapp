@@ -2,14 +2,14 @@
   import RandomColor from "../components/RandomColor.svelte";
 </script>
 
-<div class="h-full flex flex-col">
+<div class="h-full max-h-screen flex flex-col">
   <div class="flex-initial h-10">
     <slot name="infoBar">
       <RandomColor />
     </slot>
   </div>
   <div class="flex-auto">
-    <div class="h-full flex flex-row portrait:flex-col">
+    <div class="h-full flex flex-row portrait:flex-col-reverse">
       <div class="flex-1">
         <div class="h-full flex flex-row">
           <div class="flex-initial w-1/20">
