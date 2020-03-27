@@ -3,12 +3,13 @@ import { sessionStore } from "./stores";
 
 export default class {
     constructor(url, waitForResp, logLevel) {
-        this.waitForResp = waitForResp;
+        this.waitForResp = waitForResp || false;
         logLevel = logLevel || LogLevel.Information;
         this.token = "";
         sessionStore.subscribe(val => this.token = val.token);
         this.connection = new HubConnectionBuilder()
             .withUrl(url, { accessTokenFactory: () => this.token })
+            .withAutomaticReconnect()
             .configureLogging(logLevel)
             .build();
 
@@ -16,6 +17,14 @@ export default class {
         this.start.catch(err => console.error(err));
 
         this.connection.onclose(err => console.error(err));
+    }
+
+    on(eventType, cb) {
+        if(!EventType[eventType]){
+            console.error("Subscription failed. Unknown event type: " + eventType);
+            return;
+        }
+        this.connection.on(eventType, cb);
     }
 
     createGame(name) {
@@ -56,6 +65,7 @@ export const EventType = {
     PlayerLeft: "PlayerLeft",
     GameStarted: "GameStarted",
     GameChanged: "GameChanged",
+    GameDestroyed: "GameDestroyed",
     AvailableActionTypesChanged: "AvailableActionTypesChanged",
     Error: "Error",
 };

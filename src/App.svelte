@@ -3,6 +3,7 @@
   import DebugApp from "./debug/DebugApp.svelte";
   import SignInBtn from "./auth/GoogleSignIn.svelte";
   import { sessionStore } from "./services/stores";
+  import GameHubProvider from "./services/GameHubProvider.svelte";
 
   import GameBoard from "./containers/GameBoard.svelte";
 
@@ -13,11 +14,13 @@
 <Tailwindcss />
 
 {#if $sessionStore.token}
-  {#if $sessionStore.currentGame}
-    <GameBoard />
-  {:else}
-    <LobbyPage />
-  {/if}
+  <GameHubProvider url={"http://localhost:5000/game"}>
+    {#if $sessionStore.currentGame}
+      <GameBoard />
+    {:else}
+      <LobbyPage />
+    {/if}
+  </GameHubProvider>
 {:else}
   <LoginPage />
 {/if}
