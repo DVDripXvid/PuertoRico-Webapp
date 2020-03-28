@@ -4,10 +4,6 @@
 </script>
 
 <style>
-  .nameText {
-    font-size: 70%;
-  }
-
   .textPath {
     fill: none;
   }
@@ -66,7 +62,7 @@
           id="textPath"
           class="textPath"
           d="M37.31,161.55s64.42-8.89,109.11.81" />
-        <text class="nameText">
+        <text class="text-sm font-normal">
           <textPath href="#textPath">{userName}</textPath>
         </text>
       </g>
