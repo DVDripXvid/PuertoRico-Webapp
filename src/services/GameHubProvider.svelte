@@ -56,7 +56,7 @@
         g.id === ev.gameId
           ? {
               ...g,
-              players: g.players.filter(p => p.UserId !== ev.player.UserId)
+              players: g.players.filter(p => p.userId !== ev.player.userId)
             }
           : g
       )
@@ -65,7 +65,9 @@
 
   hub.on(EventType.GameChanged, ev => {
     inProgressGameStore.update(games =>
-      games.map(g => (g.id === ev.game.id ? ev.game : game))
+      games.some(g => g.id === ev.game.id)
+        ? games.map(g => (g.id === ev.game.id ? ev.game : game))
+        : [...games, ev.game]
     );
   });
 
