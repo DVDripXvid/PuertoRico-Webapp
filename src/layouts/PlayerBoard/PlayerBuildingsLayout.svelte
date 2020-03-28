@@ -6,7 +6,6 @@
   const columnCount = 4;
   const rowCount = 3;
 
-  let buildingsGrid = [];
   $: buildingsGrid = genereateGrid(buildings);
 
   function genereateGrid(items) {
