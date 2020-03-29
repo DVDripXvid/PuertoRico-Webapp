@@ -6,7 +6,11 @@ export default class {
         this.waitForResp = waitForResp || false;
         logLevel = logLevel || LogLevel.Information;
         this.token = "";
-        sessionStore.subscribe(val => this.token = val.token);
+        this.gameId = "";
+        sessionStore.subscribe(session => {
+            this.token = session.token;
+            this.gameId = session.currentGame;
+        });
         this.connection = new HubConnectionBuilder()
             .withUrl(url, { accessTokenFactory: () => this.token })
             .withAutomaticReconnect()
@@ -20,7 +24,7 @@ export default class {
     }
 
     on(eventType, cb) {
-        if(!EventType[eventType]){
+        if (!EventType[eventType]) {
             console.error("Subscription failed. Unknown event type: " + eventType);
             return;
         }
@@ -43,7 +47,8 @@ export default class {
         return this.send("StartGame", { gameId });
     }
 
-    sendCommand(type, gameId, action) {
+    sendCommand(type, action) {
+        const gameId = this.gameId;
         return this.send(type, {
             gameId,
             action

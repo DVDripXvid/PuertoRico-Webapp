@@ -17,10 +17,11 @@ module.exports = {
 
       beige: '#ddbc95',
       default: '#132b40',
+      'transparent-black': 'rgba(0,0,0,0.5)',
     },
     extend: {
       spacing: {
-        'px-2': '2px', 
+        'px-2': '2px',
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
@@ -30,7 +31,7 @@ module.exports = {
       },
       fontFamily: {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],
-      }
+      },
     },
   },
   variants: {},

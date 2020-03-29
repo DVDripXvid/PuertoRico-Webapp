@@ -5,8 +5,7 @@
   import { sessionStore } from "./services/stores";
   import GameHubProvider from "./services/GameHubProvider.svelte";
 
-  import GameBoard from "./containers/GameBoard.svelte";
-
+  import GamePage from "./pages/GamePage.svelte";
   import LoginPage from "./pages/LoginPage.svelte";
   import LobbyPage from "./pages/LobbyPage.svelte";
 </script>
@@ -16,7 +15,7 @@
 {#if $sessionStore.token}
   <GameHubProvider url={"http://localhost:5000/game"}>
     {#if $sessionStore.currentGame}
-      <GameBoard />
+      <GamePage />
     {:else}
       <LobbyPage />
     {/if}

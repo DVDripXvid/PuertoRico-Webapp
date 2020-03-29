@@ -1,7 +1,7 @@
 <script>
   import { setContext } from "svelte";
   import GameHub, { EventType } from "./gameHub";
-  import { gameHubCtx } from "./contexKeys";
+  import { gameHubCtx } from "./contextKeys";
 
   import {
     lobbyGameStore,
@@ -74,14 +74,17 @@
   hub.on(EventType.AvailableActionTypesChanged, ev => {
     availableActionTypeStore.update(availableActionTypesMap => ({
       ...availableActionTypesMap,
-      [ev.gameId]: ev.availableActionTypes
+      [ev.gameId]: ev.actionTypes
     }));
   });
 
   hub.on(EventType.Error, ev => console.error(ev));
 
   Object.keys(EventType).forEach(k =>
-    hub.connection.on(k, ev => console.log(ev))
+    hub.connection.on(k, ev => {
+      console.log(k + ": ↴");
+      console.log(ev);
+    })
   );
 </script>
 

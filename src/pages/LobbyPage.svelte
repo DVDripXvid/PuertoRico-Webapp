@@ -8,7 +8,7 @@
   import RoleSelector from "../components/RoleSelector.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
   import RandomColor from "../components/RandomColor.svelte";
-  import { gameHubCtx } from "../services/contexKeys";
+  import { gameHubCtx } from "../services/contextKeys";
 
   const maxPlayerCount = 5;
 
