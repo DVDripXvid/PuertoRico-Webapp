@@ -2,20 +2,7 @@
   import Layout from "../../layouts/PlayerBoard/PlayerTilesLayout.svelte";
   import Tile from "../../components/Tile.svelte";
 
-  let tiles = [
-    {
-      name: "CoffeePlantation",
-      hasWorker: true
-    },
-    {
-      name: "CornPlantation",
-      hasWorker: false
-    },
-    {
-      name: "Quarry",
-      hasWorker: true
-    }
-  ];
+  export let tiles = [];
 
   function handleClick(tile) {
     tiles = tiles.map(t => {

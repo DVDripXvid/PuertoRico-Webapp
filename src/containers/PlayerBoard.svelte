@@ -8,21 +8,13 @@
   import PlayerBuildings from "./playerBoard/PlayerBuildings.svelte";
   import PlayerTiles from "./playerBoard/PlayerTiles.svelte";
 
-  import { sessionStore } from "../services/stores";
-
-  export let players = [
-    {
-      name: "Béla"
-    },
-    {
-      name: "Lajos"
-    },
-    {
-      name: "László"
-    }
-  ];
+  export let players = [];
 
   let selectedPlayer = players[0];
+
+  $: imageUrl = selectedPlayer.role
+    ? `./img/roles/${selectedPlayer.role.name}.svg`
+    : selectedPlayer.pictureUrl;
 </script>
 
 <div
@@ -30,22 +22,21 @@
   style="background-image: url(./img/board.jpg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
-      <PlayerProfile userName={selectedPlayer.name} />
+      <PlayerProfile userName={selectedPlayer.userName} {imageUrl} />
     </div>
     <div class="h-full" slot="playerTiles">
-      <PlayerTiles />
+      <PlayerTiles tiles={selectedPlayer.tiles} />
     </div>
     <div class="h-full" slot="playerBuildings">
-      <PlayerBuildings />
+      <PlayerBuildings buildings={selectedPlayer.buildings} />
     </div>
     <div class="h-full" slot="playerSelector">
       <PlayerTabsLayout {players} let:prop={player}>
-        {#if player === selectedPlayer}
-          <div />
-        {:else}
+        {#if player !== selectedPlayer}
           <PlayerTab
             on:click={() => (selectedPlayer = player)}
-            userName={player.name} />
+            userName={player.userName}
+            imageUrl={player.pictureUrl} />
         {/if}
       </PlayerTabsLayout>
     </div>

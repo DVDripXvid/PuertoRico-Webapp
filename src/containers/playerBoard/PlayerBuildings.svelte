@@ -2,44 +2,7 @@
   import Layout from "../../layouts/PlayerBoard/PlayerBuildingsLayout.svelte";
   import Building from "../../components/Building.svelte";
 
-  let buildings = [
-    {
-      cost: 1,
-      name: "SmallIndigoPlant",
-      workerCapacity: 1,
-      workerCount: 0
-    },
-    {
-      cost: 3,
-      name: "IndigoPlant",
-      workerCapacity: 3,
-      workerCount: 0
-    },
-    {
-      cost: 3,
-      name: "IndigoPlant",
-      workerCapacity: 3,
-      workerCount: 3
-    },
-    {
-      cost: 1,
-      name: "SmallIndigoPlant",
-      workerCapacity: 1,
-      workerCount: 0
-    },
-    {
-      cost: 3,
-      name: "IndigoPlant",
-      workerCapacity: 3,
-      workerCount: 0
-    },
-    {
-      cost: 3,
-      name: "IndigoPlant",
-      workerCapacity: 3,
-      workerCount: 3
-    },
-  ];
+  export let buildings = [];
 
   function handleClick(building) {
     buildings = buildings.map(b => {

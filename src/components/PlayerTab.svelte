@@ -3,11 +3,12 @@
   import RandomColor from "./RandomColor.svelte";
 
   export let userName;
+  export let imageUrl;
 </script>
 
 <div class="h-full flex flex-col" on:click>
   <div class="flex-initial">
-    <PlayerProfile {userName} />
+    <PlayerProfile {userName} {imageUrl} />
   </div>
   <div class="flex-auto">
     <RandomColor />

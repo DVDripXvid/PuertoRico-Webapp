@@ -1,6 +1,6 @@
 <script>
-  export let userName = "Józsika";
-  export let imageUrl = "https://i.picsum.photos/id/1002/200/200.jpg";
+  export let userName = "";
+  export let imageUrl = "";
 </script>
 
 <style>
