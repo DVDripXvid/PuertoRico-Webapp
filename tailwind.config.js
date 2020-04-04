@@ -22,6 +22,8 @@ module.exports = {
     extend: {
       flex: {
         '1/3': '0 1 33%',
+        '1/2': '0 1 50%',
+        'break': '0 0 100%',
       },
       fontFamily: {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],

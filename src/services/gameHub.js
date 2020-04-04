@@ -49,6 +49,7 @@ export default class {
 
     sendCommand(type, action) {
         const gameId = this.gameId;
+        action = action || {};
         return this.send(type, {
             gameId,
             action
