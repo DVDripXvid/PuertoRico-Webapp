@@ -31,17 +31,22 @@
     ? `./img/roles/${selectedPlayer.role.name}.svg`
     : selectedPlayer.pictureUrl;
 
-  $: interactable = selectedPlayer.userId === $sessionStore.id;
+  $: interactable =
+    selectedPlayer.userId === $sessionStore.id &&
+    $currentGameStore.currentRole &&
+    $currentGameStore.currentRole.name === "Mayor";
 
   let selectedBuildingIndex = NaN;
   let selectedTileIndex = NaN;
 
   function selectBuilding(building) {
+    if (!interactable) return;
     selectedBuildingIndex = building.index;
     selectedTileIndex = NaN;
   }
 
   function placeOrMoveWorkerToBuilding(building) {
+    if (!interactable) return;
     if (selectedBuildingIndex === building.index) {
       return;
     }
@@ -60,6 +65,7 @@
   }
 
   function onTileClick(tile) {
+    if (!interactable) return;
     if (tile.hasWorker) {
       selectedBuildingIndex = NaN;
       selectedTileIndex = tile.index;
@@ -80,6 +86,7 @@
   }
 
   function clearSelection() {
+    if (!interactable) return;
     selectedBuildingIndex = NaN;
     selectedTileIndex = NaN;
   }

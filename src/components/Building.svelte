@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   export let building;
-  export let selected;
+  export let selected = false;
 
   const dispatch = createEventDispatcher();
 
