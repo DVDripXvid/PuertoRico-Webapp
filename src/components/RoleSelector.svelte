@@ -10,8 +10,11 @@
 
 <div class="h-full flex flex-row">
   {#each selectableRoles as role}
-    <div class="flex-1 h-full p-1" on:click={() => dispatch('select', role)}>
-      <Role {role} />
+    <div class="flex-1 h-full p-1 flex flex-col">
+      <div class="flex-auto" on:click={() => dispatch('select', role)}>
+        <Role {role} />
+      </div>
+      <div class="flex-initial self-center text-corn">{role.doubloons}</div>
     </div>
   {/each}
 </div>
