@@ -1,5 +1,5 @@
 <script>
-  import Layout from "../../layouts/PlayerBoard/PlayerBuildingsLayout.svelte";
+  import Layout from "../../layouts/playerBoard/PlayerBuildingsLayout.svelte";
   import Building from "../../components/Building.svelte";
 
   export let buildings = [];
