@@ -20,8 +20,13 @@ export const currentActionStore = derived([sessionStore, availableActionTypeStor
         : []
 );
 
-export const signedInPlayerStore = derived([sessionStore, currentGameStore], ([$sessionStore, $currentGameStore]) =>
-    $currentGameStore.players && $sessionStore.id
+export const signedInPlayerStore = derived([sessionStore, currentGameStore], ([$sessionStore, $currentGameStore]) => {
+    const currentRole = $currentGameStore.currentRole;
+    const player = $currentGameStore.players && $sessionStore.id
         ? $currentGameStore.players.find(p => p.userId === $sessionStore.id)
-        : {}
-);
+        : {};
+    return {
+        ...player,
+        hasPrivilege: currentRole && player.role && currentRole.name === player.role.name
+    };
+});

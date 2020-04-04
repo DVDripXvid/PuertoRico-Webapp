@@ -34,7 +34,6 @@ module.exports = {
       spacing: {
         'px-2': '2px',
       },
-
       width: {
         '1/20': '5%',
       },

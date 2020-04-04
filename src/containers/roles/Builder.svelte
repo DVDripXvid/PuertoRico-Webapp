@@ -42,7 +42,7 @@
 
   function getBuildingsWithDiscount(buildings) {
     let discount =
-      $signedInPlayerStore.role && $signedInPlayerStore.role.name === "Builder"
+      $signedInPlayerStore.hasPrivilege
         ? 1
         : 0;
     return buildings.map(b => ({
