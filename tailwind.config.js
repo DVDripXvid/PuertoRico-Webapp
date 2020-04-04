@@ -20,17 +20,21 @@ module.exports = {
       'transparent-black': 'rgba(0,0,0,0.5)',
     },
     extend: {
-      spacing: {
-        'px-2': '2px',
+      flex: {
+        '1/3': '0 1 33%',
+      },
+      fontFamily: {
+        'californian': ['CalifornianFB-Bold', 'Californian FB'],
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
       },
+      spacing: {
+        'px-2': '2px',
+      },
+
       width: {
         '1/20': '5%',
-      },
-      fontFamily: {
-        'californian': ['CalifornianFB-Bold', 'Californian FB'],
       },
     },
   },

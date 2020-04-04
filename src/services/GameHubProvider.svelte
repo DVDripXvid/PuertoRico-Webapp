@@ -78,7 +78,11 @@
     }));
   });
 
-  hub.on(EventType.Error, ev => console.error(ev));
+  hub.on(EventType.Error, ev => {
+    // TODO: notification
+    alert(ev.errorMessage);
+    console.error(ev);
+  });
 
   Object.keys(EventType).forEach(k =>
     hub.connection.on(k, ev => {

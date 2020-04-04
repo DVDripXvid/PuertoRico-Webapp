@@ -11,18 +11,9 @@
   <div class="flex-auto">
     <div class="h-full flex flex-row portrait:flex-col-reverse">
       <div class="flex-1">
-        <div class="h-full flex flex-row">
-          <div class="flex-initial w-1/20">
-            <slot name="roleSelector">
-              <RandomColor />
-            </slot>
-          </div>
-          <div class="flex-auto">
-            <slot name="roleBoard">
-              <RandomColor />
-            </slot>
-          </div>
-        </div>
+        <slot name="roleBoard">
+          <RandomColor />
+        </slot>
       </div>
       <div class="flex-1">
         <slot name="playerBoard">
