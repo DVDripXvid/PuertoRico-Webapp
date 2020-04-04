@@ -4,26 +4,30 @@
   import SmallBuildingsLayout from "../../layouts/roles/builder/SmallBuildingsLayout.svelte";
   import LargeBuildingsLayout from "../../layouts/roles/builder/LargeBuildingsLayout.svelte";
   import Building from "../../components/Building.svelte";
-  import { currentGameStore, currentActionStore } from "../../services/stores";
+  import {
+    currentGameStore,
+    currentActionStore,
+    signedInPlayerStore
+  } from "../../services/stores";
   import { gameHubCtx } from "../../services/contextKeys";
   import { CommandType } from "../../services/gameHub";
+
+  $: buildings = getBuildingsWithDiscount($currentGameStore.buildings);
 
   $: tabs = [
     {
       name: "Production",
-      buildings: $currentGameStore.buildings.filter(
-        b => b.type === "Production"
-      ),
+      buildings: buildings.filter(b => b.type === "Production"),
       layout: SmallBuildingsLayout
     },
     {
       name: "Small",
-      buildings: $currentGameStore.buildings.filter(b => b.type === "Small"),
+      buildings: buildings.filter(b => b.type === "Small"),
       layout: SmallBuildingsLayout
     },
     {
       name: "Large",
-      buildings: $currentGameStore.buildings.filter(b => b.type === "Large"),
+      buildings: buildings.filter(b => b.type === "Large"),
       layout: LargeBuildingsLayout
     }
   ];
@@ -35,6 +39,25 @@
   onMount(() => {
     selectedTab = tabs[0];
   });
+
+  function getBuildingsWithDiscount(buildings) {
+    let discount =
+      $signedInPlayerStore.hasPrivilege
+        ? 1
+        : 0;
+    return buildings.map(b => ({
+      ...b,
+      cost: Math.max(
+        0,
+        b.cost -
+          Math.min(
+            b.maxDiscountByQuarry,
+            discount +
+              $signedInPlayerStore.tiles.filter(t => t.name === "Quarry").length
+          )
+      )
+    }));
+  }
 
   function onBuildingClick(building) {
     if ($currentActionStore.includes(CommandType.Build)) {
