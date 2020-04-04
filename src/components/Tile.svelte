@@ -2,6 +2,7 @@
   import { fade } from "svelte/transition";
 
   export let tile;
+  export let selected;
   $: imgUrl = `./img/tiles/${tile.name}.svg`;
 </script>
 
@@ -22,9 +23,9 @@
 </style>
 
 <div
-  on:click
-  class:selected={tile.selected}
-  class:unselected={!tile.selected}
+  on:click|stopPropagation
+  class:selected
+  class:unselected={!selected}
   transition:fade={{ duration: 1000 }}
   style={`background: url(${imgUrl})`}>
 

@@ -7,6 +7,7 @@
   import Settler from "./roles/Settler.svelte";
   import Trader from "./roles/Trader.svelte";
   import RoleTab from "../components/RoleTab.svelte";
+  import { currentGameStore } from "../services/stores";
 
   let tabs = [
     {
@@ -35,7 +36,9 @@
     }
   ];
 
-  let selectedTab = tabs[0];
+  let selectedTab = $currentGameStore.currentRole
+    ? tabs.find(t => t.name === $currentGameStore.currentRole.name)
+    : tabs[0];
 </script>
 
 <div class="h-full bg-corn">

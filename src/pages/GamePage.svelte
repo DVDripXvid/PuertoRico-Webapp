@@ -7,10 +7,7 @@
   import Overlay from "../components/Overlay.svelte";
   import { CommandType } from "../services/gameHub";
   import { gameHubCtx } from "../services/contextKeys";
-  import {
-    currentGameStore,
-    currentActionStore
-  } from "../services/stores";
+  import { currentGameStore, currentActionStore } from "../services/stores";
 
   $: isSelecRole = $currentActionStore.includes(CommandType.SelectRole);
 
@@ -19,10 +16,7 @@
 
 <GameLayout>
   <div class="h-full" slot="playerBoard">
-    <PlayerBoard
-      players={$currentGameStore.players}
-      role={$currentGameStore.currentRole}
-      availableActions={$currentActionStore} />
+    <PlayerBoard />
   </div>
   <div class="h-full" slot="roleBoard">
     <RoleBoard />

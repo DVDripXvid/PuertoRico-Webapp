@@ -30,7 +30,7 @@
 
   let selectedTab = {};
 
-  let hub = getContext(gameHubCtx);
+  const hub = getContext(gameHubCtx);
 
   onMount(() => {
     selectedTab = tabs[0];
