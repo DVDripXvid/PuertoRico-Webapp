@@ -35,6 +35,7 @@
 </style>
 
 <div
+  on:click
   class:selected
   class:unselected={!selected}
   style={`background: url(${imgUrl})`}>

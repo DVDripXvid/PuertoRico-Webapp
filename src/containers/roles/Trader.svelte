@@ -51,7 +51,9 @@
   {#if good.type}
     <Good {good} />
   {:else}
-    <div class="h-full bg-beige opacity-75" />
+    <div class="h-full bg-beige opacity-75">
+      <svg viewBox="0 0 170.33 170.33" />
+    </div>
   {/if}
   <div class="h-full" slot="actions">
     <ActionsLayout {goodTypes} let:prop={goodType}>
