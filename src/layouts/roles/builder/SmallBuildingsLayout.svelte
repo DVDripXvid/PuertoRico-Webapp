@@ -3,6 +3,7 @@
   import { quintOut } from "svelte/easing";
   import { fade } from "svelte/transition";
   import RandomColor from "../../../components/RandomColor.svelte";
+  import { removeDuplicates } from "../../../services/utils";
 
   export let buildings = [];
 
@@ -18,19 +19,16 @@
     }
     return columns;
   }
-
-  function removeDuplicates(myArr, prop) {
-    return myArr.filter((obj, pos, arr) => {
-      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
-    });
-  }
 </script>
 
 <div class="flex flex-row h-full">
   {#each columns as column}
     <div class="flex-1 flex flex-col h-full">
       {#each column as building, i (building.index)}
-        <div class="flex-1" animate:flip={{ duration: 300, easing: quintOut }} transition:fade={{ duration: 300 }}>
+        <div
+          class="flex-1"
+          animate:flip={{ duration: 300, easing: quintOut }}
+          transition:fade={{ duration: 300 }}>
           <slot prop={building}>
             <RandomColor />
           </slot>

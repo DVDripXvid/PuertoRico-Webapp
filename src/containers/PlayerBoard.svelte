@@ -32,9 +32,8 @@
     : selectedPlayer.pictureUrl;
 
   $: interactable =
-    selectedPlayer.userId === $sessionStore.id &&
-    $currentGameStore.currentRole &&
-    $currentGameStore.currentRole.name === "Mayor";
+    $currentActionStore.includes(CommandType.MoveColonist) ||
+    $currentActionStore.includes(CommandType.PlaceColonist);
 
   let selectedBuildingIndex = NaN;
   let selectedTileIndex = NaN;
