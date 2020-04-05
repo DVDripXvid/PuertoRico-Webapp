@@ -21,12 +21,18 @@ module.exports = {
     },
     extend: {
       flex: {
-        '1/3': '0 1 33%',
+        '1/3': '0 1 33.3%',
         '1/2': '0 1 50%',
         'break': '0 0 100%',
       },
       fontFamily: {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],
+      },
+      maxWidth: {
+        '1/4': '25%',
+        '1/3': '33.3%',
+        '1/2': '50%',
+        '3/4': '75%',
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
