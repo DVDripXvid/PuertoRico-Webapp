@@ -20,6 +20,11 @@ module.exports = {
       'transparent-black': 'rgba(0,0,0,0.5)',
     },
     extend: {
+      gridTemplateColumns: {
+        '2-w-1/4': 'repeat(2, minmax(25%, 25%))',
+        '3-w-1/4': 'repeat(3, minmax(25%, 25%))',
+        '4-w-1/4': 'repeat(4, minmax(25%, 25%))',
+      },
       flex: {
         '1/3': '0 1 33.3%',
         '1/2': '0 1 50%',
