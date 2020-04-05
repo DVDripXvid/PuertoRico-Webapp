@@ -111,7 +111,7 @@
       </StoreActionsLayout>
     {/if}
     <div slot="action">
-      <button on:click={sendStoreGoods}>Apply selected stores</button>
+      <button on:click={sendStoreGoods}>Apply selected storing</button>
     </div>
   </StorageLayout>
 {:else}

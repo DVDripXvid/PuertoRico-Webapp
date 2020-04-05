@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-initial h-10">
+  <div class="flex-initial">
     <slot name="playerStatistics">
       <RandomColor />
     </slot>

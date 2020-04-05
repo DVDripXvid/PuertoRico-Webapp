@@ -154,9 +154,7 @@
     </div>
     <div class="h-full" slot="playerStatistics">
       <PlayerStats
-        on:endPhase={() => hub.sendCommand(CommandType.EndPhase, {})}
-        role={$currentGameStore.currentRole}
-        endPhaseEnabled={$currentActionStore.includes(CommandType.EndPhase)}
+        goods={selectedPlayer.goods}
         doubloons={selectedPlayer.doubloons}
         victoryPoints={selectedPlayer.victoryPoints}
         colonists={selectedPlayer.idleColonistCount} />
