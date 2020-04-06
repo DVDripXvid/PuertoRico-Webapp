@@ -33,11 +33,22 @@ module.exports = {
       fontFamily: {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],
       },
+      margin: {
+        'p1': '1%'
+      },
       maxWidth: {
         '1/4': '25%',
         '1/3': '33.3%',
         '1/2': '50%',
         '3/4': '75%',
+      },
+      minWidth: {
+        '12': '12rem',
+        '6': '4rem',
+        '3': '3rem'
+      },
+      padding: {
+        'p2': '2%'
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
@@ -49,17 +60,6 @@ module.exports = {
         '1/20': '5%',
         '1/8': '12.5%'
       },
-      margin: {
-        'p1': '1%'
-      },
-      padding: {
-        'p2': '2%'
-      }
-    },
-    minWidth: {
-      '12': '12rem',
-      '6': '4rem',
-      '3': '3rem'
     },
   },
   variants: {},
