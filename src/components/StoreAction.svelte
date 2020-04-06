@@ -1,6 +1,7 @@
 <script>
   export let goodType;
-  export let price;
+  export let storeName;
+  export let capacity;
 
   $: imgUrl = `./img/goods/${goodType}.svg`;
 </script>
@@ -13,12 +14,13 @@
 
 <div class="flex flex-row justify-center">
   <div class="word">
-    <button on:click>Sell</button>
+    <button on:click>Prepare {capacity}</button>
   </div>
   <div class="word w-6">
     <img src={imgUrl} alt={goodType} />
   </div>
   <div class="word">for</div>
-  <div class="word">{price}</div>
-  <div class="word">doubloon(s)</div>
+  <div class="word">storing</div>
+  <div class="word">in</div>
+  <div class="word">{storeName}</div>
 </div>

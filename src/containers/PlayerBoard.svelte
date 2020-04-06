@@ -32,9 +32,8 @@
     : selectedPlayer.pictureUrl;
 
   $: interactable =
-    selectedPlayer.userId === $sessionStore.id &&
-    $currentGameStore.currentRole &&
-    $currentGameStore.currentRole.name === "Mayor";
+    $currentActionStore.includes(CommandType.MoveColonist) ||
+    $currentActionStore.includes(CommandType.PlaceColonist);
 
   let selectedBuildingIndex = NaN;
   let selectedTileIndex = NaN;
@@ -155,9 +154,7 @@
     </div>
     <div class="h-full" slot="playerStatistics">
       <PlayerStats
-        on:endPhase={() => hub.sendCommand(CommandType.EndPhase, {})}
-        role={$currentGameStore.currentRole}
-        endPhaseEnabled={$currentActionStore.includes(CommandType.EndPhase)}
+        goods={selectedPlayer.goods}
         doubloons={selectedPlayer.doubloons}
         victoryPoints={selectedPlayer.victoryPoints}
         colonists={selectedPlayer.idleColonistCount} />

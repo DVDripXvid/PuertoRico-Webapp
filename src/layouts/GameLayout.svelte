@@ -3,7 +3,7 @@
 </script>
 
 <div class="h-full max-h-screen flex flex-col">
-  <div class="flex-initial h-10">
+  <div class="flex-initial">
     <slot name="infoBar">
       <RandomColor />
     </slot>
