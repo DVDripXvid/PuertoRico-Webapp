@@ -36,7 +36,19 @@ module.exports = {
       },
       width: {
         '1/20': '5%',
+        '1/8': '12.5%'
       },
+      margin: {
+        'p1': '1%'
+      },
+      padding: {
+        'p2': '2%'
+      }
+    },
+    minWidth: {
+      '12': '12rem',
+      '6': '4rem',
+      '3': '3rem'
     },
   },
   variants: {},
