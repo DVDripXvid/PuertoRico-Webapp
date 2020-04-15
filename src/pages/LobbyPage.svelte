@@ -19,25 +19,20 @@
     return game.players.some(p => p.userId === userId);
   }
 
-  function setActiveGame(game){
+  function setActiveGame(game) {
     sessionStore.update(session => ({
       ...session,
-      currentGame: game.id,
+      currentGame: game.id
     }));
   }
 </script>
 
 <!--HEADER-->
-<div class="h-full flex flex-col">
+<div class="h-full flex flex-col min-h-0">
   <div
-    class="flex flex-row justify-center h-48 bg-cover bg-center text-6xl
-    text-sugar font-black"
-    style="background-image: url(./img/board.jpg)">
-    <div
-      class="flex flex-auto justify-center self-center transform translate-x-32">
-      LOBBY
-    </div>
-    <div class="mt-5 mr-5 w-56 z-50">
+    class="flex flex-row bg-cover bg-center"
+    style="background-image: url(./img/misc/LobbyHeader.svg)">
+    <div class="p-2 w-1/8">
       <PlayerProfile
         userName={$sessionStore.name}
         imageUrl={$sessionStore.imageUrl} />
@@ -45,100 +40,105 @@
     <div />
   </div>
 
-  <div class="flex flex-row bg-sugar">
+  <div class="flex-auto flex flex-row portrait:flex-col bg-sugar min-h-0">
 
     <!--JOIN GAME-->
-    <div class="flex-1 flex flex-col border-2 content-center">
-      <div class="flex-initial h-20 text-center bg-corn p-4 text-3xl">
-        JOIN GAME
+    <div
+      class="flex-1 flex flex-col border-2 border-primary content-center min-h-0">
+      <div>
+        <img src="img/misc/JoinGame.svg" alt="join" />
       </div>
-      <div class="flex flex-auto p-10">
-        <div class="flex-1 flex flex-col">
-          {#each $lobbyGameStore as game}
-            <div class="flex flex-auto">
-              <div
-                class="flex flex-auto flex-row bg-default rounded-lg m-3 p-2">
-                <div class="flex-1 flex flex-row">
-                  {#each game.players as player}
-                    <div class="flex-initial text-sugar p-2">
-                      {player.userName}
-                    </div>
-                  {/each}
-                  {#each new Array(maxPlayerCount - game.players.length) as slot}
-                    <div class="flex-initial text-sugar p-2">Empty slot</div>
-                  {/each}
+      <div class="flex-auto flex flex-col p-p2 overflow-y-auto">
+        {#each $lobbyGameStore as game}
+          <div
+            class="flex flex-row items-center bg-default rounded-lg m-p1 p-p2">
+            <div class="flex-1 flex flex-row">
+              {#each game.players as player}
+                <div class="flex-auto min-w-3 p-p2">
+                  <PlayerProfile
+                    userName={player.userName}
+                    imageUrl={player.pictureUrl} />
                 </div>
-
-                <div class="flex self-end">
-                  {#if isJoined(game)}
-                    <button
-                      class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                      on:click={() => hub.leaveGame(game.id)}>
-                      Leave
-                    </button>
-                    {#if game.players.length >= 3}
-                      <button
-                        class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                        on:click={() => hub.startGame(game.id)}>
-                        Start
-                      </button>
-                    {/if}
-                  {:else}
-                    <button
-                      class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                      on:click={() => hub.joinGame(game.id)}>
-                      Join
-                    </button>
-                  {/if}
+              {/each}
+              {#each new Array(maxPlayerCount - game.players.length) as slot}
+                <div class="flex-auto text-sugar min-w-3 p-p2">
+                  <img src="img/misc/EmptySlot.svg" alt="EmptySlot" />
                 </div>
-              </div>
+              {/each}
             </div>
-          {/each}
-        </div>
+            <div class="flex self-center">
+              {#if isJoined(game)}
+                <button
+                  class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
+                  on:click={() => hub.leaveGame(game.id)}>
+                  Leave
+                </button>
+                {#if game.players.length >= 3}
+                  <button
+                    class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
+                    on:click={() => hub.startGame(game.id)}>
+                    Start
+                  </button>
+                {/if}
+              {:else}
+                <button
+                  class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
+                  on:click={() => hub.joinGame(game.id)}>
+                  Join
+                </button>
+              {/if}
+            </div>
+          </div>
+        {/each}
       </div>
     </div>
 
-    <!--CONTINUE GAME-->
-    <div class="flex-1 flex flex-col border-2">
-      <div class="h-20 flex-initial text-center bg-corn p-4 text-3xl">
-        CONTINUE GAME
+    <!--LAUNCH GAME-->
+    <div class="flex-1 flex flex-col border-2 border-primary min-h-0">
+      <div>
+        <img src="img/misc/LaunchGame.svg" alt="launch" />
       </div>
-      <div class="flex-auto p-10">
-        <div class="h-full flex flex-col">
-          <div
-            class="flex-1 flex flex-row flex-start h-20 bg-default rounded-lg
-            m-3 p-2">
-            {#each $inProgressGameStore as game}
-              {#each game.players as player}
-                <div class="flex-1 bg-corn m-2 rounded-lg">
-                  <PlayerProfile userName={player.userName} imageUrl={player.pictureUrl} />
-                </div>
-              {/each}
-              <div class="flex w-32 self-center justify-end">
-                <button on:click={() => setActiveGame(game)} class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
-                  Continue
-                </button>
+      <div class="h-full flex flex-col overflow-y-auto p-p2">
+        {#each $inProgressGameStore as game}
+          <div class="flex flex-row flex-start bg-default rounded-lg m-p1 p-p2">
+            {#each game.players as player}
+              <div class="flex-auto min-w-3 text-sugar p-p2">
+                <PlayerProfile
+                  userName={player.userName}
+                  imageUrl={player.pictureUrl} />
               </div>
             {/each}
+            <div class="flex w-32 self-center justify-end">
+              <button
+                on:click={() => setActiveGame(game)}
+                class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
+                Launch
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="h-20 bg-default rounded-lg m-3" />
-        <div class="h-20 bg-default rounded-lg m-3" />
+        {/each}
       </div>
     </div>
   </div>
 
   <!--NEW GAME-->
-  <div class="flex flex-row h-56 p-10 bg-default">
-    <div class="flex flex-auto" />
-    <button
-      class="self-center text-center text-3xl bg-tobacco border-none
-      hover:bg-coffee h-20 w-2/6 rounded-lg transform transition-all
-      duration-500 hover:scale-105"
+  <div class="flex flex-row justify-center bg-default">
+    <div
+      class="w-1/12 p-p2 min-w-6 self-center transform transition-all
+      duration-500 hover:-translate-x-1/2">
+      <img src="img/misc/ShipL.svg" alt="Ship" />
+    </div>
+    <div
+      class="w-1/6 p-p2 transform min-w-12 transition-all duration-500 scale-90
+      hover:scale-100"
       on:click={() => hub.createGame($sessionStore.name + "'s game")}>
-      Create New Game
-    </button>
-    <div class="flex flex-auto" />
+      <img src="img/misc/NewGameButton.svg" alt="New Game" />
+    </div>
+    <div
+      class="w-1/12 p-p2 min-w-6 self-center transform transition-all
+      duration-500 hover:translate-x-1/2">
+      <img src="img/misc/ShipR.svg" alt="Ship" />
+    </div>
   </div>
 </div>
 

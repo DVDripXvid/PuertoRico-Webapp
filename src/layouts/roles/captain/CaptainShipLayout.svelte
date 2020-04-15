@@ -1,7 +1,5 @@
 <script>
   export let shipableGoods = [];
-
-  $: console.table(shipableGoods);
 </script>
 
 <div class="h-full flex flex-row">

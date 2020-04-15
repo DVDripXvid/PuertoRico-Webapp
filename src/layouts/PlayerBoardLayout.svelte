@@ -29,9 +29,8 @@
           </div>
         </div>
       </div>
-      <div class="flex-initial w-1/20">
+      <div class="flex-initial flex justify-center w-1/5">
         <slot name="playerSelector">
-          <RandomColor />
         </slot>
       </div>
     </div>

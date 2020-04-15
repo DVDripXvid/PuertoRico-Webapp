@@ -10,6 +10,6 @@
   }
 </style>
 
-<div class="h-full bg-primary rounded-r-lg" on:click>
+<div class="flex h-full bg-stats rounded-r-lg items-center justify-center text-default font-bold" on:click>
   <p>{name}</p>
 </div>
