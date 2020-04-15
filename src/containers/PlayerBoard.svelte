@@ -110,7 +110,7 @@
 <svelte:body on:click={() => clearSelection()} />
 <div
   class="h-full bg-no-repeat bg-cover"
-  style="background-image: url(./img/board.jpg)">
+  style="background-image: url(./img/playersideBg.svg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
       <PlayerProfile userName={selectedPlayer.userName} {imageUrl} />
@@ -142,14 +142,14 @@
         {/if}
       </PlayerBuildingsLayout>
     </div>
-    <div class="h-full" slot="playerSelector">
+    <div class="h-full flex-1" slot="playerSelector">
       <PlayerTabsLayout players={$currentGameStore.players} let:prop={player}>
-        {#if player.userId !== selectedPlayer.userId}
+        <!--{#if player.userId !== selectedPlayer.userId}-->
           <PlayerTab
             on:click={() => (selectedPlayer = player)}
             userName={player.userName}
             imageUrl={player.pictureUrl} />
-        {/if}
+        <!--{/if}-->
       </PlayerTabsLayout>
     </div>
     <div class="h-full" slot="playerStatistics">

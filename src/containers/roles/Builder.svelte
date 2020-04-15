@@ -71,12 +71,12 @@
 
 <Layout {tabs} let:prop={tab}>
   <div
-    class:bg-ribbon-lighter={tab.name == selectedTab.name}
+    class:bg-stats={tab.name == selectedTab.name}
     class="text-center rounded-t"
     on:click={() => (selectedTab = tab)}>
     {tab.name}
   </div>
-  <div class="h-full bg-ribbon-lighter" slot="content">
+  <div class="h-full bg-stats p-p1" slot="content">
     <svelte:component
       this={selectedTab.layout}
       buildings={selectedTab.buildings}

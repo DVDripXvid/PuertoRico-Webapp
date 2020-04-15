@@ -51,11 +51,11 @@
   {#if good.type}
     <Good {good} />
   {:else}
-    <div class="h-full bg-beige opacity-75">
-      <svg viewBox="0 0 170.33 170.33" />
+    <div class="flex-initial">
+      <img src="img/misc/MarketSlot.svg" alt="Market" />
     </div>
   {/if}
-  <div class="h-full" slot="actions">
+  <div class="h-full flex justify-center" slot="actions">
     <ActionsLayout {goodTypes} let:prop={goodType}>
       <SellGood
         on:click={() => hub.sendCommand(CommandType.SellGood, {

@@ -9,13 +9,16 @@ module.exports = {
       coffee: '#664848',
 
       roles: '#e8edf3',
+      roletabs: '#236a75',
+      compass: '#236a75',
       ribbon: {
-        default: '#3f7b89',
-        lighter: '#5f8ba9',
-        darker: '#1f5b69',
+        default: '#835837',
+        lighter: '#b38867',
+        darker: '#332827',
       },
 
       beige: '#ddbc95',
+      stats: "#ddad7a",
       default: '#132b40',
       'transparent-black': 'rgba(0,0,0,0.5)',
     },
@@ -34,9 +37,15 @@ module.exports = {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],
       },
       margin: {
-        'p1': '1%'
+        'p1': '1%',
+        'p2': '2%',
+        'p3': '3%',
+        'p4': '4%',
+        'p5': '5%',
+        'p20': '20%'
       },
       maxWidth: {
+        '1/12': '8.3%',
         '1/4': '25%',
         '1/3': '33.3%',
         '1/2': '50%',
@@ -44,11 +53,13 @@ module.exports = {
       },
       minWidth: {
         '12': '12rem',
+        '7': '7rem',
         '6': '4rem',
         '3': '3rem'
       },
       padding: {
-        'p2': '2%'
+        'p2': '2%',
+        'p1': '1%'
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },

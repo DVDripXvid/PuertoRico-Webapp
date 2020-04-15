@@ -43,13 +43,15 @@
   <div class="flex-auto flex flex-row portrait:flex-col bg-sugar min-h-0">
 
     <!--JOIN GAME-->
-    <div class="flex-1 flex flex-col border-2 border-primary content-center min-h-0">
-      <div class="">
+    <div
+      class="flex-1 flex flex-col border-2 border-primary content-center min-h-0">
+      <div>
         <img src="img/misc/JoinGame.svg" alt="join" />
       </div>
       <div class="flex-auto flex flex-col p-p2 overflow-y-auto">
         {#each $lobbyGameStore as game}
-          <div class="flex flex-row items-center bg-default rounded-lg m-p1 p-p2">
+          <div
+            class="flex flex-row items-center bg-default rounded-lg m-p1 p-p2">
             <div class="flex-1 flex flex-row">
               {#each game.players as player}
                 <div class="flex-auto min-w-3 p-p2">
@@ -93,7 +95,7 @@
 
     <!--LAUNCH GAME-->
     <div class="flex-1 flex flex-col border-2 border-primary min-h-0">
-      <div class="">
+      <div>
         <img src="img/misc/LaunchGame.svg" alt="launch" />
       </div>
       <div class="h-full flex flex-col overflow-y-auto p-p2">
@@ -122,16 +124,19 @@
   <!--NEW GAME-->
   <div class="flex flex-row justify-center bg-default">
     <div
-      class="w-1/12 p-p2 min-w-6 self-center transform transition-all duration-500 hover:-translate-x-1/2">
+      class="w-1/12 p-p2 min-w-6 self-center transform transition-all
+      duration-500 hover:-translate-x-1/2">
       <img src="img/misc/ShipL.svg" alt="Ship" />
     </div>
     <div
-      class="w-1/6 p-p2 transform min-w-12 transition-all duration-500 hover:scale-105"
+      class="w-1/6 p-p2 transform min-w-12 transition-all duration-500 scale-90
+      hover:scale-100"
       on:click={() => hub.createGame($sessionStore.name + "'s game")}>
       <img src="img/misc/NewGameButton.svg" alt="New Game" />
     </div>
     <div
-      class="w-1/12 p-p2 min-w-6 self-center transform transition-all duration-500 hover:translate-x-1/2">
+      class="w-1/12 p-p2 min-w-6 self-center transform transition-all
+      duration-500 hover:translate-x-1/2">
       <img src="img/misc/ShipR.svg" alt="Ship" />
     </div>
   </div>

@@ -6,11 +6,8 @@
   export let imageUrl;
 </script>
 
-<div class="h-full flex flex-col" on:click>
-  <div class="flex-initial">
+<div class="flex flex-col justify-center items-center" on:click>
+  <div class="flex-initial w-3/4">
     <PlayerProfile {userName} {imageUrl} />
-  </div>
-  <div class="flex-auto">
-    <RandomColor />
   </div>
 </div>

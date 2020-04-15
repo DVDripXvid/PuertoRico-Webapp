@@ -2,7 +2,7 @@
   export let goods = [];
 </script>
 
-<div class="h-full flex flex-col">
+<div class="h-full flex flex-col portrait:flex-row">
   <div class="flex-1 flex flex-row flex-wrap">
     {#each goods as good}
       <div class="flex-1/2 p-2">

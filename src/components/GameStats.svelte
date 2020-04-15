@@ -68,8 +68,12 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="h-full bg-beige flex flex-row justify-between">
-  <button on:click={() => dispatch('back')}>Lobby</button>
+<div class="h-full bg-stats flex flex-row justify-between">
+  <button
+    class="flex-auto border-none min-w-7 max-w-1/12"
+    on:click={() => dispatch('back')}>
+    <img src="img/misc/ToLobby.svg" alt="To Lobby" />
+  </button>
   {#each items as item}
     <div class="flex-initial flex flex-row items-center mt-1 mb-1">
       <div class="flex-initial w-6 ml-3 mr-1">
@@ -86,5 +90,9 @@
       <div class="flex-initial">{currentRoleName}</div>
     </div>
   {/if}
-  <button on:click={() => dispatch('endTurn')}>End turn</button>
+  <button
+    class="flex-auto border-none min-w-7 max-w-1/12"
+    on:click={() => dispatch('endTurn')}>
+    <img src="img/misc/EndTurn.svg" alt="End Turn" />
+  </button>
 </div>
