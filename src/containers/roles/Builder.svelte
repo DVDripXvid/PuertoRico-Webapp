@@ -50,7 +50,7 @@
           Math.min(
             b.maxDiscountByQuarry,
             discount +
-              $signedInPlayerStore.tiles.filter(t => t.name === "Quarry").length
+              $signedInPlayerStore.tiles.filter(t => t.name === "Quarry" && t.hasWorker).length
           )
       )
     }));
