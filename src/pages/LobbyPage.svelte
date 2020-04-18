@@ -22,7 +22,8 @@
   function setActiveGame(game) {
     sessionStore.update(session => ({
       ...session,
-      currentGame: game.id
+      currentGame: game.id,
+      showLobby: false
     }));
   }
 </script>

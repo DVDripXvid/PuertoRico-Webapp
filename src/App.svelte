@@ -13,11 +13,11 @@
 <Tailwindcss />
 
 {#if $sessionStore.token}
-  <GameHubProvider url={"http://localhost:5000/game"}>
-    {#if $sessionStore.currentGame}
-      <GamePage />
-    {:else}
+  <GameHubProvider url={'http://localhost:5000/game'}>
+    {#if $sessionStore.showLobby}
       <LobbyPage />
+    {:else}
+      <GamePage />
     {/if}
   </GameHubProvider>
 {:else}

@@ -58,8 +58,10 @@ module.exports = {
         '3': '3rem'
       },
       padding: {
+        'p1': '1%',
         'p2': '2%',
-        'p1': '1%'
+        'p5': '5%',
+        'p10': '10%'
       },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
