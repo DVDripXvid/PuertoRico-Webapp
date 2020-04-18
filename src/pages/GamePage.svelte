@@ -8,6 +8,7 @@
   import RoleSelector from "../components/RoleSelector.svelte";
   import Overlay from "../components/Overlay.svelte";
   import Button from "../components/ButtonWithIcon.svelte";
+  import TextWithIcon from "../components/TextWithIcon.svelte";
   import { CommandType } from "../services/gameHub";
   import { gameHubCtx } from "../services/contextKeys";
   import {
@@ -39,9 +40,15 @@
             reverse={true} />
         {/if}
       </div>
+      <div class="h-full" slot="currentRole">
+        {#if $currentGameStore.currentRole}
+          <TextWithIcon
+            text={$currentGameStore.currentRole.name}
+            iconUrl={`./img/roles/${$currentGameStore.currentRole.name}.svg`} />
+        {/if}
+      </div>
       <div slot="statistics">
         <GameStats
-          currentRoleName={$currentGameStore.currentRole ? $currentGameStore.currentRole.name : ''}
           colonists={$currentGameStore.colonistsCount}
           victoryPoints={$currentGameStore.victoryPoints}
           corn={$currentGameStore.cornCount}

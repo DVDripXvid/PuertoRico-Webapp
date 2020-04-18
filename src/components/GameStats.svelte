@@ -10,7 +10,6 @@
   export let sugar = 0;
   export let tobacco = 0;
   export let coffee = 0;
-  export let currentRoleName;
 
   const stats = tweened(null, {
     duration: 1000,
@@ -66,7 +65,7 @@
   ];
 </script>
 
-<div class="h-full flex flex-row justify-around">
+<div class="h-full flex flex-row justify-between">
   {#each items as item}
     <div class="flex-initial flex flex-row items-center my-1">
       <div class="flex-initial w-6 mx-1 mr-1">
@@ -75,12 +74,4 @@
       <div class="flex-initial">{Math.round($stats[item.statKey])}</div>
     </div>
   {/each}
-  {#if currentRoleName}
-    <div class="flex-initial flex flex-row items-center my-1">
-      <div class="flex-initial w-6 mx-1 mr-1">
-        <img src={`./img/roles/${currentRoleName}.svg`} alt="" />
-      </div>
-      <div class="flex-initial">{currentRoleName}</div>
-    </div>
-  {/if}
 </div>
