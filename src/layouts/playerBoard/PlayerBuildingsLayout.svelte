@@ -22,11 +22,17 @@
   }
 </script>
 
+<style>
+  .max-w-building {
+    max-width: 16vh;
+  }
+</style>
+
 <div
   class={`${buildings.length == 0 ? 'h-full' : ''} grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
   {#each buildingsGrid as row}
     {#each row as building}
-      <div class="row-auto col-auto m-2">
+      <div class="row-auto col-auto m-p2 max-w-building">
         <slot prop={building}>
           <RandomColor />
         </slot>

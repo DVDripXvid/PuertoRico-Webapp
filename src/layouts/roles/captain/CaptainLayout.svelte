@@ -4,7 +4,7 @@
 
 <div class="h-full flex flex-col">
   {#each cargoShips as ship}
-    <div class="flex-1 p-10">
+    <div class="flex-1 px-p10 py-p5">
       <slot prop={ship} />
     </div>
   {/each}

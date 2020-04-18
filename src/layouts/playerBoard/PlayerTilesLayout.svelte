@@ -25,7 +25,7 @@
   class={`${tiles.length == 0 ? 'h-full' : ''} grid grid-cols-${columnCount} grid-rows-${rowCount}`}>
   {#each tilesGrid as row}
     {#each row as tile}
-      <div class="row-auto col-auto m-2">
+      <div class="row-auto col-auto m-p2">
         <slot prop={tile}>
           <RandomColor />
         </slot>

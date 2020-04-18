@@ -2,8 +2,14 @@
   export let shipableGoods = [];
 </script>
 
+<style>
+  .max-w-ship {
+    max-width: 35vh;
+  }
+</style>
+
 <div class="h-full flex flex-row">
-  <div class="flex-auto">
+  <div class="flex-auto max-w-ship">
     <slot name="ship" />
   </div>
   <div class="flex-initial flex flex-col justify-start p-1">
