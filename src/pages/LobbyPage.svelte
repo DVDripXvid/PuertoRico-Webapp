@@ -71,20 +71,20 @@
               {#if isJoined(game)}
                 <button
                   class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                  on:click={() => hub.leaveGame(game.id)}>
+                  on:click|stopPropagation={() => hub.leaveGame(game.id)}>
                   Leave
                 </button>
                 {#if game.players.length >= 3}
                   <button
                     class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                    on:click={() => hub.startGame(game.id)}>
+                    on:click|stopPropagation={() => hub.startGame(game.id)}>
                     Start
                   </button>
                 {/if}
               {:else}
                 <button
                   class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
-                  on:click={() => hub.joinGame(game.id)}>
+                  on:click|stopPropagation={() => hub.joinGame(game.id)}>
                   Join
                 </button>
               {/if}
@@ -111,7 +111,7 @@
             {/each}
             <div class="flex w-32 self-center justify-end">
               <button
-                on:click={() => setActiveGame(game)}
+                on:click|stopPropagation={() => setActiveGame(game)}
                 class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
                 Launch
               </button>
@@ -132,7 +132,7 @@
     <div
       class="w-1/6 p-p2 transform min-w-12 transition-all duration-500 scale-90
       hover:scale-100"
-      on:click={() => hub.createGame($sessionStore.name + "'s game")}>
+      on:click|stopPropagation={() => hub.createGame($sessionStore.name + "'s game")}>
       <img src="img/misc/NewGameButton.svg" alt="New Game" />
     </div>
     <div
@@ -142,7 +142,3 @@
     </div>
   </div>
 </div>
-
-<!-- <RoleSelector
-  on:select={event => alert('It works from lobby. Selected: ' + event.detail.roleName)}
-  prospectorCount={c} /> -->

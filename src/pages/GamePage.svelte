@@ -19,6 +19,10 @@
 
   $: isSelecRole = $currentActionStore.includes(CommandType.SelectRole);
 
+  let isOverlayOpen = true;
+
+  $: isSelectRoleVisible = isSelecRole && isOverlayOpen;
+
   const hub = getContext(gameHubCtx);
 </script>
 
@@ -37,6 +41,12 @@
             on:click={() => hub.sendCommand(CommandType.EndPhase)}
             iconUrl="img/misc/EndTurnIcon.svg"
             text="End Turn"
+            reverse={true} />
+        {:else if isSelecRole}
+          <Button
+            on:click={() => (isOverlayOpen = true)}
+            iconUrl="img/misc/EndTurnIcon.svg"
+            text="Choose role"
             reverse={true} />
         {/if}
       </div>
@@ -67,7 +77,7 @@
   </div>
 </GameLayout>
 
-{#if isSelecRole}
+{#if isSelectRoleVisible}
   <Overlay>
     <RoleSelector
       selectableRoles={$currentGameStore.selectableRoles}
@@ -76,3 +86,4 @@
         })} />
   </Overlay>
 {/if}
+<svelte:body on:click={() => (isOverlayOpen = false)} />

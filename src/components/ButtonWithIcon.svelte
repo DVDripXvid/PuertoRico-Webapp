@@ -13,7 +13,7 @@
 
 <div
   class="h-full flex flex-row bg-tobacco hover:bg-coffee cursor-pointer"
-  on:click
+  on:click|stopPropagation
   class:flex-row-reverse={reverse}>
   <div
     bind:this={element}
