@@ -21,10 +21,12 @@
     { name: "Coffee", price: 4 }
   ];
 
-  $: goodTypes = types.map(gt => ({
-    ...gt,
-    price: gt.price + calculateBonus($signedInPlayerStore)
-  }));
+  $: goodTypes = types
+    .filter(gt => $signedInPlayerStore.goods.some(pgt => pgt.type === gt.name))
+    .map(gt => ({
+      ...gt,
+      price: gt.price + calculateBonus($signedInPlayerStore)
+    }));
 
   function getGoods(tradeHouse) {
     const goods = tradeHouse.goods;

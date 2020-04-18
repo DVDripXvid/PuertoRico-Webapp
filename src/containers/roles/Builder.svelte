@@ -12,7 +12,7 @@
   import { gameHubCtx } from "../../services/contextKeys";
   import { CommandType } from "../../services/gameHub";
 
-  $: buildings = getBuildingsWithDiscount($currentGameStore.buildings);
+  $: buildings = getBuildingsWithDiscount($signedInPlayerStore, $currentGameStore.buildings);
 
   $: tabs = [
     {
@@ -40,8 +40,8 @@
     selectedTab = tabs[0];
   });
 
-  function getBuildingsWithDiscount(buildings) {
-    let discount = $signedInPlayerStore.hasPrivilege ? 1 : 0;
+  function getBuildingsWithDiscount(player, buildings) {
+    let discount = player.hasPrivilege ? 1 : 0;
     return buildings.map(b => ({
       ...b,
       cost: Math.max(
@@ -50,7 +50,7 @@
           Math.min(
             b.maxDiscountByQuarry,
             discount +
-              $signedInPlayerStore.tiles.filter(t => t.name === "Quarry" && t.hasWorker).length
+              player.tiles.filter(t => t.name === "Quarry").length
           )
       )
     }));
