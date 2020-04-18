@@ -9,7 +9,8 @@
       name: profile.getName(),
       email: profile.getEmail(),
       imageUrl: profile.getImageUrl() + "?sz=512",
-      id: profile.getId()
+      id: profile.getId(),
+      showLobby: true
     };
     sessionStore.set(session);
   };

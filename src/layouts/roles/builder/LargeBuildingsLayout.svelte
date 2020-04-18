@@ -7,9 +7,15 @@
   export let buildings = [];
 </script>
 
+<style>
+.max-w-building{
+  max-width: 30vh;
+}
+</style>
+
 <div class="flex flex-row flex-wrap">
   {#each buildings as building, i (building.index)}
-    <div class="flex-1/3" animate:flip={{ duration: 300, easing: quintOut }} transition:fade={{ duration: 300 }}>
+    <div class="flex-1/3 max-w-building" animate:flip={{ duration: 300, easing: quintOut }} transition:fade|local={{ duration: 300 }}>
       <slot prop={building}>
         <RandomColor />
       </slot>

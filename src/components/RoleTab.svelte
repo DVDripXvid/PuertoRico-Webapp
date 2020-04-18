@@ -10,6 +10,6 @@
   }
 </style>
 
-<div class="flex h-full bg-stats rounded-r-lg items-center justify-center text-default font-bold" on:click>
+<div class="py-1 flex h-full bg-stats rounded-r-lg items-center justify-center text-default font-bold" on:click>
   <p>{name}</p>
 </div>

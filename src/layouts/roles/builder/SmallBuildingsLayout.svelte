@@ -28,7 +28,7 @@
         <div
           class="flex-1"
           animate:flip={{ duration: 300, easing: quintOut }}
-          transition:fade={{ duration: 300 }}>
+          transition:fade|local={{ duration: 300 }}>
           <slot prop={building}>
             <RandomColor />
           </slot>

@@ -36,7 +36,7 @@
     }
   ];
 
-  let selectedTab = $currentGameStore.currentRole
+  $: selectedTab = $currentGameStore.currentRole
     ? tabs.find(t => t.name === $currentGameStore.currentRole.name)
     : tabs[0];
 </script>

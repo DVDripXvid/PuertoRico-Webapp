@@ -10,7 +10,6 @@
   export let sugar = 0;
   export let tobacco = 0;
   export let coffee = 0;
-  export let currentRoleName;
 
   const stats = tweened(null, {
     duration: 1000,
@@ -64,35 +63,15 @@
       statKey: "victoryPoints"
     }
   ];
-
-  const dispatch = createEventDispatcher();
 </script>
 
-<div class="h-full bg-stats flex flex-row justify-between">
-  <button
-    class="flex-auto border-none min-w-7 max-w-1/12"
-    on:click={() => dispatch('back')}>
-    <img src="img/misc/ToLobby.svg" alt="To Lobby" />
-  </button>
+<div class="h-full flex flex-row justify-between">
   {#each items as item}
-    <div class="flex-initial flex flex-row items-center mt-1 mb-1">
-      <div class="flex-initial w-6 ml-3 mr-1">
+    <div class="flex-initial flex flex-row items-center my-1">
+      <div class="flex-initial w-6 mx-1 mr-1">
         <img src={item.imgSrc} alt={item.alt} />
       </div>
       <div class="flex-initial">{Math.round($stats[item.statKey])}</div>
     </div>
   {/each}
-  {#if currentRoleName}
-    <div class="flex-initial flex flex-row items-center mt-1 mb-1">
-      <div class="flex-initial w-6 ml-3 mr-1">
-        <img src={`./img/roles/${currentRoleName}.svg`} alt="" />
-      </div>
-      <div class="flex-initial">{currentRoleName}</div>
-    </div>
-  {/if}
-  <button
-    class="flex-auto border-none min-w-7 max-w-1/12"
-    on:click={() => dispatch('endTurn')}>
-    <img src="img/misc/EndTurn.svg" alt="End Turn" />
-  </button>
 </div>
