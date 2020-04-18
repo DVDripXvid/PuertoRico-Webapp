@@ -112,7 +112,7 @@
 <svelte:body on:click={() => clearSelection()} />
 <div
   class="h-full bg-no-repeat bg-cover"
-  style="background-image: url(./img/playersideBg.svg)">
+  style="background-image: url(./img/player-board.svg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
       <PlayerProfile
