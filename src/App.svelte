@@ -13,7 +13,7 @@
 <Tailwindcss />
 
 {#if $sessionStore.token}
-  <GameHubProvider url={'http://localhost:5000/game'}>
+  <GameHubProvider url={'https://puertorico.azurewebsites.net/game'}>
     {#if $sessionStore.showLobby}
       <LobbyPage />
     {:else}
