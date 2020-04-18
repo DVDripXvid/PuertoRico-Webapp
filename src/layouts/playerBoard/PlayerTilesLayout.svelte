@@ -10,8 +10,8 @@
 
   function generateGrid(items) {
     const tilesGrid = [];
-    for (let i = 0; i <= rowCount * columnCount; i += columnCount) {
-      let rowItems = items.slice(i, columnCount);
+    for (let i = 0; i < rowCount * columnCount; i += columnCount) {
+      let rowItems = items.slice(i, i + columnCount);
       while (rowItems.length < columnCount) {
         rowItems.push({});
       }
