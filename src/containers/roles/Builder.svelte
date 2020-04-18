@@ -41,10 +41,7 @@
   });
 
   function getBuildingsWithDiscount(buildings) {
-    let discount =
-      $signedInPlayerStore.hasPrivilege
-        ? 1
-        : 0;
+    let discount = $signedInPlayerStore.hasPrivilege ? 1 : 0;
     return buildings.map(b => ({
       ...b,
       cost: Math.max(
@@ -60,12 +57,7 @@
   }
 
   function onBuildingClick(building) {
-    if ($currentActionStore.includes(CommandType.Build)) {
-      hub.sendCommand(CommandType.Build, { buildingIndex: building.index });
-    } else {
-      // TODO: notification
-      alert("Build is not allowed right now");
-    }
+    hub.sendCommand(CommandType.Build, { buildingIndex: building.index });
   }
 </script>
 
