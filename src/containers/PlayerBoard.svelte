@@ -27,10 +27,6 @@
     p => p.userId === selectedPlayer.userId
   );
 
-  $: imageUrl = selectedPlayer.role
-    ? `./img/roles/${selectedPlayer.role.name}.svg`
-    : selectedPlayer.pictureUrl;
-
   $: interactable =
     $currentActionStore.includes(CommandType.MoveColonist) ||
     $currentActionStore.includes(CommandType.PlaceColonist);
@@ -105,6 +101,12 @@
       isPlaceToTile
     });
   }
+
+  function getImageUrl(player) {
+    return player.role
+      ? `./img/roles/${player.role.name}.svg`
+      : player.pictureUrl;
+  }
 </script>
 
 <svelte:body on:click={() => clearSelection()} />
@@ -113,7 +115,9 @@
   style="background-image: url(./img/playersideBg.svg)">
   <Layout>
     <div class="h-full" slot="playerProfile">
-      <PlayerProfile userName={selectedPlayer.userName} {imageUrl} />
+      <PlayerProfile
+        userName={selectedPlayer.userName}
+        imageUrl={getImageUrl(selectedPlayer)} />
     </div>
     <div class="h-full" slot="playerTiles">
       <PlayerTilesLayout tiles={selectedPlayer.tiles} let:prop={tile}>
@@ -144,12 +148,10 @@
     </div>
     <div class="h-full flex-1" slot="playerSelector">
       <PlayerTabsLayout players={$currentGameStore.players} let:prop={player}>
-        <!--{#if player.userId !== selectedPlayer.userId}-->
-          <PlayerTab
-            on:click={() => (selectedPlayer = player)}
-            userName={player.userName}
-            imageUrl={player.pictureUrl} />
-        <!--{/if}-->
+        <PlayerTab
+          on:click={() => (selectedPlayer = player)}
+          userName={player.userName}
+          imageUrl={getImageUrl(player)} />
       </PlayerTabsLayout>
     </div>
     <div class="h-full" slot="playerStatistics">
