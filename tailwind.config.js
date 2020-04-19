@@ -63,6 +63,9 @@ module.exports = {
         'p5': '5%',
         'p10': '10%'
       },
+      scale: {
+        '60': '.6'
+      },
       screens: {
         'portrait': { 'raw': '(orientation: portrait)' },
       },

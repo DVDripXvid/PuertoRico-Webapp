@@ -66,7 +66,7 @@
   hub.on(EventType.GameChanged, ev => {
     inProgressGameStore.update(games =>
       games.some(g => g.id === ev.game.id)
-        ? games.map(g => (g.id === ev.game.id ? ev.game : game))
+        ? games.map(g => (g.id === ev.game.id ? ev.game : g))
         : [...games, ev.game]
     );
   });
