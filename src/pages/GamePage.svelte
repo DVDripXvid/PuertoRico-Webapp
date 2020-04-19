@@ -78,7 +78,7 @@
 </GameLayout>
 
 {#if isSelectRoleVisible}
-  <Overlay>
+  <Overlay on:cancel={() => (isOverlayOpen = false)}>
     <RoleSelector
       selectableRoles={$currentGameStore.selectableRoles}
       on:select={ev => hub.sendCommand(CommandType.SelectRole, {
@@ -86,4 +86,3 @@
         })} />
   </Overlay>
 {/if}
-<svelte:body on:click={() => (isOverlayOpen = false)} />
