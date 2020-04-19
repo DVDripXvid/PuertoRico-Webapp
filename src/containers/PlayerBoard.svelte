@@ -150,6 +150,7 @@
       <PlayerTabsLayout players={$currentGameStore.players} let:prop={player}>
         <PlayerTab
           on:click={() => (selectedPlayer = player)}
+          isCurrent={$currentGameStore.currentPlayer.userId === player.userId}
           userName={player.userName}
           imageUrl={getImageUrl(player)} />
       </PlayerTabsLayout>

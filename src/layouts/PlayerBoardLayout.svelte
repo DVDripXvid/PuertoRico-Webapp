@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="flex-initial flex justify-center w-1/5">
+      <div class="flex-initial flex justify-center w-1/6">
         <slot name="playerSelector">
         </slot>
       </div>
