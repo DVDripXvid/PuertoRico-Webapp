@@ -116,7 +116,7 @@
   <Layout>
     <div class="h-full" slot="playerProfile">
       <PlayerProfile
-        userName={selectedPlayer.userName}
+        username={selectedPlayer.username}
         imageUrl={getImageUrl(selectedPlayer)} />
     </div>
     <div class="h-full" slot="playerTiles">
@@ -151,7 +151,7 @@
         <PlayerTab
           on:click={() => (selectedPlayer = player)}
           isCurrent={$currentGameStore.currentPlayer.userId === player.userId}
-          userName={player.userName}
+          username={player.username}
           imageUrl={getImageUrl(player)} />
       </PlayerTabsLayout>
     </div>

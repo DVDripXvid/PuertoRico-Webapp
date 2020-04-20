@@ -4,6 +4,7 @@
   import SignInBtn from "./auth/GoogleSignIn.svelte";
   import { sessionStore } from "./services/stores";
   import { getConfig } from "./config";
+  import LobbyHubProvider from "./services/LobbyHubProvider.svelte";
   import GameHubProvider from "./services/GameHubProvider.svelte";
 
   import GamePage from "./pages/GamePage.svelte";
@@ -16,13 +17,15 @@
 <Tailwindcss />
 
 {#if $sessionStore.token}
-  <GameHubProvider url={config.hubUrl}>
-    {#if $sessionStore.showLobby}
+  {#if $sessionStore.showLobby}
+    <LobbyHubProvider url={config.hubUrl}>
       <LobbyPage />
-    {:else}
+    </LobbyHubProvider>
+  {:else}
+    <GameHubProvider>
       <GamePage />
-    {/if}
-  </GameHubProvider>
+    </GameHubProvider>
+  {/if}
 {:else}
   <LoginPage />
 {/if}

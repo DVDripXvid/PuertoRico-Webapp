@@ -72,7 +72,7 @@
   }
 </style>
 
-<UserProfile userName={$sessionStore.name} imageUrl={$sessionStore.imageUrl} />
+<UserProfile username={$sessionStore.name} imageUrl={$sessionStore.imageUrl} />
 
 {#if game}
   <div class="horizontalPanel">
@@ -89,7 +89,7 @@
     <h4>Players:</h4>
     <ul>
       {#each players as p}
-        <li>{p.userName}</li>
+        <li>{p.username}</li>
       {/each}
     </ul>
     {#if players.length >= 3}
