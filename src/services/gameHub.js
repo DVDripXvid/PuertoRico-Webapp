@@ -18,9 +18,6 @@ export default class {
             .build();
 
         this.start = this.connection.start();
-        this.start.catch(err => console.error(err));
-
-        this.connection.onclose(err => console.error(err));
     }
 
     on(eventType, cb) {

@@ -1,7 +1,9 @@
 <script>
-  import { setContext, onDestroy } from "svelte";
+  import { setContext, onDestroy, createEventDispatcher } from "svelte";
   import GameHub, { EventType } from "./gameHub";
   import { gameHubCtx } from "./contextKeys";
+  import Overlay from "../components/Overlay.svelte";
+  import LoadingScreen from "../components/LoadingScreen.svelte";
 
   import {
     lobbyGameStore,
@@ -10,21 +12,30 @@
     availableActionTypeStore
   } from "./stores";
 
+  const dispatch = createEventDispatcher();
+
   const url = $currentGameStore.endpoint;
 
+  let showGame = false;
+  let showLoading = true;
   const hub = new GameHub(url);
+  hub.connection.onreconnecting(() => (showLoading = true));
+  hub.connection.onreconnected(() => (showLoading = false));
+  hub.connection.onclose(() => dispatch("failure"));
+  hub.start.catch(() => dispatch("failure"));
   setContext(gameHubCtx, hub);
-  let ready = false;
 
   onDestroy(() => hub.stop());
 
   hub.on(EventType.GameChanged, ev => {
-    ready = true;
     inProgressGameStore.update(games =>
       games.some(g => g.id === ev.game.id)
         ? games.map(g => (g.id === ev.game.id ? ev.game : g))
         : [...games, ev.game]
     );
+    showGame = true;
+    showLoading = false;
+    dispatch("ready");
   });
 
   hub.on(EventType.AvailableActionTypesChanged, ev => {
@@ -48,6 +59,11 @@
   );
 </script>
 
-{#if ready}
+{#if showGame}
   <slot />
+{/if}
+{#if showLoading}
+  <Overlay>
+    <LoadingScreen />
+  </Overlay>
 {/if}
