@@ -8,11 +8,11 @@
   import RoleSelector from "../components/RoleSelector.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
   import RandomColor from "../components/RandomColor.svelte";
-  import { gameHubCtx } from "../services/contextKeys";
+  import { lobbyHubCtx } from "../services/contextKeys";
 
   const maxPlayerCount = 5;
 
-  const hub = getContext(gameHubCtx);
+  const hub = getContext(lobbyHubCtx);
 
   function isJoined(game) {
     const userId = $sessionStore.id;
@@ -35,7 +35,7 @@
     style="background-image: url(./img/misc/LobbyHeader.svg)">
     <div class="p-2 w-1/8">
       <PlayerProfile
-        userName={$sessionStore.name}
+        username={$sessionStore.name}
         imageUrl={$sessionStore.imageUrl} />
     </div>
     <div />
@@ -57,7 +57,7 @@
               {#each game.players as player}
                 <div class="flex-auto min-w-3 p-p2">
                   <PlayerProfile
-                    userName={player.userName}
+                    username={player.username}
                     imageUrl={player.pictureUrl} />
                 </div>
               {/each}
@@ -105,7 +105,7 @@
             {#each game.players as player}
               <div class="flex-auto min-w-3 text-sugar p-p2">
                 <PlayerProfile
-                  userName={player.userName}
+                  username={player.username}
                   imageUrl={player.pictureUrl} />
               </div>
             {/each}

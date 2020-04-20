@@ -1,5 +1,5 @@
 <script>
-  export let userName = "";
+  export let username = "";
   export let imageUrl = "";
 </script>
 
@@ -22,7 +22,7 @@
 </style>
 
 <svg viewBox="0 0 180.37 186.36">
-  <title>{userName}</title>
+  <title>{username}</title>
   <defs>
     <clipPath id="imageCirclePath">
       <circle cx="91.23" cy="92.03" r="57.62" />
@@ -38,7 +38,7 @@
         href={imageUrl}
         class="h-full w-full"
         clip-path="url(#imageCirclePath)"
-        alt={userName} />
+        alt={username} />
     </g>
     <g id="ribbon">
       <path
@@ -67,7 +67,7 @@
           class="textPath"
           d="M37.31,161.55s64.42-8.89,109.11.81" />
         <text class="text-sm font-normal">
-          <textPath href="#textPath">{userName}</textPath>
+          <textPath href="#textPath">{username}</textPath>
         </text>
       </g>
     </g>

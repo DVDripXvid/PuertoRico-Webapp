@@ -6,13 +6,11 @@ export default class {
         this.waitForResp = waitForResp || false;
         logLevel = logLevel || LogLevel.Information;
         this.token = "";
-        this.gameId = "";
         sessionStore.subscribe(session => {
             this.token = session.token;
-            this.gameId = session.currentGame;
         });
         this.connection = new HubConnectionBuilder()
-            .withUrl(url += "?gameId=" + this.gameId, { accessTokenFactory: () => this.token })
+            .withUrl(url, { accessTokenFactory: () => this.token })
             .withAutomaticReconnect()
             .configureLogging(logLevel)
             .build();
@@ -31,13 +29,20 @@ export default class {
         this.connection.on(eventType, cb);
     }
 
-    sendCommand(type, action) {
-        const gameId = this.gameId;
-        action = action || {};
-        return this.send(type, {
-            gameId,
-            action
-        });
+    createGame(name) {
+        return this.send("CreateGame", { name });
+    }
+
+    joinGame(gameId) {
+        return this.send("JoinGame", { gameId })
+    }
+
+    leaveGame(gameId) {
+        return this.send("LeaveGame", { gameId })
+    }
+
+    startGame(gameId) {
+        return this.send("StartGame", { gameId });
     }
 
     async send(methodName, msg) {
@@ -54,23 +59,10 @@ export default class {
 }
 
 export const EventType = {
-    GameChanged: "GameChanged",
-    AvailableActionTypesChanged: "AvailableActionTypesChanged",
+    GameCreated: "GameCreated",
+    PlayerJoined: "PlayerJoined",
+    PlayerLeft: "PlayerLeft",
+    GameStarted: "GameStarted",
+    GameDestroyed: "GameDestroyed",
     Error: "Error",
 };
-
-export const CommandType = {
-    SelectRole: "SelectRole",
-    EndPhase: "EndPhase",
-    Build: "Build",
-    TakePlantation: "TakePlantation",
-    TakeQuarry: "TakeQuarry",
-    TakeRandomPlantation: "TakeRandomPlantation",
-    BonusProduction: "BonusProduction",
-    SellGood: "SellGood",
-    DeliverGoods: "DeliverGoods",
-    UseWharf: "UseWharf",
-    StoreGoods: "StoreGoods",
-    MoveColonist: "MoveColonist",
-    PlaceColonist: "PlaceColonist",
-}
