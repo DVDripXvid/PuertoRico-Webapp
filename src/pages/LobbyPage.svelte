@@ -127,7 +127,7 @@
     <div
       class="w-1/12 p-p2 min-w-6 self-center transform transition-all
       duration-500 hover:-translate-x-1/2">
-      <img src="img/misc/ShipL.svg" alt="Ship" />
+      <img src="img/misc/ShipL.svg" alt="*" />
     </div>
     <div
       class="w-1/6 p-p2 transform min-w-12 transition-all duration-500 scale-90
@@ -138,7 +138,7 @@
     <div
       class="w-1/12 p-p2 min-w-6 self-center transform transition-all
       duration-500 hover:translate-x-1/2">
-      <img src="img/misc/ShipR.svg" alt="Ship" />
+      <img src="img/misc/ShipR.svg" alt="*" />
     </div>
   </div>
 </div>
