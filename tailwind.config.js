@@ -20,6 +20,7 @@ module.exports = {
       beige: '#ddbc95',
       stats: "#ddad7a",
       default: '#132b40',
+      text: '#c4c6b5',
       'transparent-black': 'rgba(0,0,0,0.5)',
     },
     extend: {
@@ -35,6 +36,7 @@ module.exports = {
       },
       fontFamily: {
         'californian': ['CalifornianFB-Bold', 'Californian FB'],
+        'minion': 'Minion Variable Concept',
       },
       margin: {
         'p1': '1%',
@@ -42,10 +44,12 @@ module.exports = {
         'p3': '3%',
         'p4': '4%',
         'p5': '5%',
-        'p20': '20%'
+        'p20': '20%',
       },
       maxWidth: {
         '1/12': '8.3%',
+        '1/10': '10%',
+        '1/5': '20%',
         '1/4': '25%',
         '1/3': '33.3%',
         '1/2': '50%',
@@ -74,7 +78,8 @@ module.exports = {
       },
       width: {
         '1/20': '5%',
-        '1/8': '12.5%'
+        '1/8': '12.5%',
+        '22': '5.5rem'
       },
     },
   },

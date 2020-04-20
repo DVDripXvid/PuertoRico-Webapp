@@ -45,7 +45,7 @@
         {:else if isSelecRole}
           <Button
             on:click={() => (isOverlayOpen = true)}
-            iconUrl="img/misc/EndTurnIcon.svg"
+            iconUrl="img/misc/ChooseRole.svg"
             text="Choose role"
             reverse={true} />
         {/if}
