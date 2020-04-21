@@ -65,8 +65,6 @@
     });
 
     hub.on(EventType.Error, ev => {
-      // TODO: notification
-      alert(ev.errorMessage);
       console.error(ev);
     });
 

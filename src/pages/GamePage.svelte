@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext, setContext } from "svelte";
   import GameLayout from "../layouts/GameLayout.svelte";
   import StatusBarLayout from "../layouts/StatusBarLayout.svelte";
   import PlayerBoard from "../containers/PlayerBoard.svelte";
@@ -9,7 +9,8 @@
   import Overlay from "../components/Overlay.svelte";
   import Button from "../components/ButtonWithIcon.svelte";
   import TextWithIcon from "../components/TextWithIcon.svelte";
-  import { CommandType } from "../services/gameHub";
+  import SnackBar from "../components/SnackBar.svelte";
+  import { CommandType, EventType } from "../services/gameHub";
   import { gameHubCtx } from "../services/contextKeys";
   import {
     currentGameStore,
@@ -24,9 +25,24 @@
   $: isSelectRoleVisible = isSelecRole && isOverlayOpen;
 
   const hub = getContext(gameHubCtx);
+
+  let showMessage = false;
+  let message = "";
+  let messageTimeoutId;
+
+  hub.on(EventType.Error, ev => {
+    message = ev.errorMessage;
+    showMessage = true;
+    messageTimeoutId = setTimeout(() => (showMessage = false), 5000);
+  });
+
+  function closeMessage() {
+    messageTimeoutId && clearTimeout(messageTimeoutId);
+    showMessage = false;
+  }
 </script>
 
-<GameLayout>
+<GameLayout {showMessage}>
   <div class="bg-stats" slot="infoBar">
     <StatusBarLayout>
       <div class="h-full" slot="actionLeft">
@@ -68,6 +84,9 @@
           coffee={$currentGameStore.coffeeCount} />
       </div>
     </StatusBarLayout>
+  </div>
+  <div class:h-full={showMessage} slot="snackBar">
+    <SnackBar on:click={closeMessage} {message} />
   </div>
   <div class="h-full" slot="playerBoard">
     <PlayerBoard />
