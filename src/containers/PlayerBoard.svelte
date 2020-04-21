@@ -124,6 +124,7 @@
         {#if tile.name}
           <Tile
             {tile}
+            isButton={interactable}
             selected={tile.index === selectedTileIndex}
             on:click={() => onTileClick(tile)} />
         {:else}
@@ -137,6 +138,7 @@
         let:prop={building}>
         {#if building.name}
           <Building
+            isSlotButton={interactable}
             selected={building.index === selectedBuildingIndex}
             {building}
             on:slotClick={() => placeOrMoveWorkerToBuilding(building)}

@@ -4,6 +4,7 @@
   export let building;
   export let selected = false;
   export let isButton = false;
+  export let isSlotButton = false;
 
   const dispatch = createEventDispatcher();
 
@@ -43,6 +44,7 @@
   style={`background: url(${imgUrl})`}>
   <svg {viewBox}>
     <circle
+      class:cursor-pointer={isSlotButton}
       class:filledSlot={building.workerCount >= 1}
       class:emptySlot={building.workerCount < 1}
       on:click={ev => handleCircleClick(ev, building.workerCount >= 1)}
@@ -51,6 +53,7 @@
       r="15.3" />
     {#if building.workerCapacity >= 2}
       <circle
+        class:cursor-pointer={isSlotButton}
         class:filledSlot={building.workerCount >= 2}
         class:emptySlot={building.workerCount < 3}
         on:click={ev => handleCircleClick(ev, building.workerCount >= 2)}
@@ -60,6 +63,7 @@
     {/if}
     {#if building.workerCapacity >= 3}
       <circle
+        class:cursor-pointer={isSlotButton}
         class:filledSlot={building.workerCount >= 3}
         class:emptySlot={building.workerCount < 3}
         on:click={ev => handleCircleClick(ev, building.workerCount >= 3)}
