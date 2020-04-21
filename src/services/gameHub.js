@@ -51,6 +51,7 @@ export default class {
 export const EventType = {
     GameChanged: "GameChanged",
     AvailableActionTypesChanged: "AvailableActionTypesChanged",
+    GameEnded: "GameEnded",
     Error: "Error",
 };
 

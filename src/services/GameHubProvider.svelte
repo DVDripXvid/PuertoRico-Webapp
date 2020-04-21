@@ -4,6 +4,7 @@
   import { gameHubCtx } from "./contextKeys";
   import Overlay from "../components/Overlay.svelte";
   import LoadingScreen from "../components/LoadingScreen.svelte";
+  import GameEndScreen from "../components/GameEndScreen.svelte";
 
   import {
     lobbyGameStore,
@@ -14,6 +15,9 @@
 
   const dispatch = createEventDispatcher();
   const minLoadingScreenTime = 2000;
+
+  let gameEnded = false;
+  let results = {};
 
   let isShowGame = false;
   let isShowLoading = true;
@@ -64,6 +68,11 @@
       }));
     });
 
+    hub.on(EventType.GameEnded, ev => {
+      gameEnded = true;
+      results = ev.results;
+    });
+
     hub.on(EventType.Error, ev => {
       console.error(ev);
     });
@@ -83,5 +92,10 @@
 {#if isShowLoading}
   <Overlay>
     <LoadingScreen />
+  </Overlay>
+{/if}
+{#if gameEnded}
+  <Overlay>
+    <GameEndScreen {results} />
   </Overlay>
 {/if}
