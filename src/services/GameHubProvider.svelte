@@ -13,56 +13,76 @@
   } from "./stores";
 
   const dispatch = createEventDispatcher();
+  const minLoadingScreenTime = 2000;
 
-  const url = $currentGameStore.endpoint;
+  let isShowGame = false;
+  let isShowLoading = true;
+  let loadingPromise = new Promise(resolve =>
+    setTimeout(resolve, minLoadingScreenTime)
+  );
 
-  let showGame = false;
-  let showLoading = true;
-  const hub = new GameHub(url);
-  hub.connection.onreconnecting(() => (showLoading = true));
-  hub.connection.onreconnected(() => (showLoading = false));
-  hub.connection.onclose(() => dispatch("failure"));
-  hub.start.catch(() => dispatch("failure"));
+  function showLoading() {
+    isShowLoading = true;
+    loadingPromise = new Promise(resolve =>
+      setTimeout(resolve, minLoadingScreenTime)
+    );
+  }
+
+  function hideLoading() {
+    loadingPromise.then(() => {
+      isShowLoading = false;
+    });
+  }
+
+  const hub = new GameHub();
   setContext(gameHubCtx, hub);
-
   onDestroy(() => hub.stop());
 
-  hub.on(EventType.GameChanged, ev => {
-    inProgressGameStore.update(games =>
-      games.some(g => g.id === ev.game.id)
-        ? games.map(g => (g.id === ev.game.id ? ev.game : g))
-        : [...games, ev.game]
+  const unsubscribe = currentGameStore.subscribe(game => {
+    if (hub.connection || !game.id || !game.endpoint) return;
+    hub.start(game.endpoint, game.id).catch(() => dispatch("failure"));
+    hub.connection.onreconnecting(showLoading);
+    hub.connection.onreconnected(hideLoading);
+    hub.connection.onclose(() => dispatch("failure"));
+    hub.start;
+
+    hub.on(EventType.GameChanged, ev => {
+      inProgressGameStore.update(games =>
+        games.some(g => g.id === ev.game.id)
+          ? games.map(g => (g.id === ev.game.id ? ev.game : g))
+          : [...games, ev.game]
+      );
+      isShowGame = true;
+      hideLoading();
+      dispatch("ready");
+    });
+
+    hub.on(EventType.AvailableActionTypesChanged, ev => {
+      availableActionTypeStore.update(availableActionTypesMap => ({
+        ...availableActionTypesMap,
+        [ev.gameId]: ev.actionTypes
+      }));
+    });
+
+    hub.on(EventType.Error, ev => {
+      // TODO: notification
+      alert(ev.errorMessage);
+      console.error(ev);
+    });
+
+    Object.keys(EventType).forEach(k =>
+      hub.connection.on(k, ev => {
+        console.log(k + ": ↴");
+        console.log(ev);
+      })
     );
-    showGame = true;
-    showLoading = false;
-    dispatch("ready");
   });
-
-  hub.on(EventType.AvailableActionTypesChanged, ev => {
-    availableActionTypeStore.update(availableActionTypesMap => ({
-      ...availableActionTypesMap,
-      [ev.gameId]: ev.actionTypes
-    }));
-  });
-
-  hub.on(EventType.Error, ev => {
-    // TODO: notification
-    alert(ev.errorMessage);
-    console.error(ev);
-  });
-
-  Object.keys(EventType).forEach(k =>
-    hub.connection.on(k, ev => {
-      console.log(k + ": ↴");
-      console.log(ev);
-    })
-  );
 </script>
 
-{#if showGame}
+{#if isShowGame}
   <slot />
 {/if}
-{#if showLoading}
+{#if isShowLoading}
   <Overlay>
     <LoadingScreen />
   </Overlay>

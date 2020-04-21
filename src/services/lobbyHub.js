@@ -2,8 +2,7 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { sessionStore } from "./stores";
 
 export default class {
-    constructor(url, waitForResp, logLevel) {
-        this.waitForResp = waitForResp || false;
+    constructor(url, logLevel) {
         logLevel = logLevel || LogLevel.Information;
         this.token = "";
         sessionStore.subscribe(session => {
@@ -47,9 +46,7 @@ export default class {
 
     async send(methodName, msg) {
         await this.start;
-        return this.waitForResp
-            ? this.connection.invoke(methodName, msg)
-            : this.connection.send(methodName, msg);
+        return this.connection.send(methodName, msg);
     }
 
     stop() {

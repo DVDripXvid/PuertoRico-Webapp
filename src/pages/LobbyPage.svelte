@@ -7,12 +7,17 @@
   } from "../services/stores.js";
   import RoleSelector from "../components/RoleSelector.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
+  import LoadingScreen from "../components/LoadingScreen.svelte";
   import RandomColor from "../components/RandomColor.svelte";
   import { lobbyHubCtx } from "../services/contextKeys";
 
   const maxPlayerCount = 5;
 
   const hub = getContext(lobbyHubCtx);
+  let isLoading = !hub.connection.connectionStarted;
+  hub.start.then(() => (isLoading = false));
+  hub.connection.onreconnecting(() => (isLoading = true));
+  hub.connection.onreconnected(() => (isLoading = false));
 
   function isJoined(game) {
     const userId = $sessionStore.id;
@@ -31,14 +36,18 @@
 <!--HEADER-->
 <div class="h-full flex flex-col min-h-0">
   <div
-    class="flex flex-row bg-cover bg-center"
+    class="flex flex-row justify-between bg-cover bg-center"
     style="background-image: url(./img/misc/LobbyHeader.svg)">
     <div class="p-2 w-1/8">
       <PlayerProfile
         username={$sessionStore.name}
         imageUrl={$sessionStore.imageUrl} />
     </div>
-    <div />
+    {#if isLoading}
+      <div class="p-2 w-1/10">
+        <LoadingScreen />
+      </div>
+    {/if}
   </div>
 
   <div class="flex-auto flex flex-row portrait:flex-col bg-sugar min-h-0">
