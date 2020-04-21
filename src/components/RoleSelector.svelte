@@ -11,9 +11,7 @@
 
 <div class="h-full flex flex-row">
   {#each selectableRoles as role}
-    <div
-      transition:fade
-      class="flex-1 h-full p-1 flex flex-col">
+    <div transition:fade class="cursor-pointer flex-1 h-full p-1 flex flex-col">
       <div
         class="flex-auto"
         on:click|stopPropagation={() => dispatch('select', role)}>
