@@ -14,7 +14,7 @@
     {/if}
   </div>
   <div
-    class="flex-initial w-full transform transition-all duration-500
+    class="cursor-pointer flex-initial w-full transform transition-all duration-500
     hover:scale-75">
     <PlayerProfile {username} {imageUrl} />
   </div>

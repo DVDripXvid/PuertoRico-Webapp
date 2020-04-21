@@ -69,7 +69,7 @@
 <Layout {tabs} let:prop={tab}>
   <div
     class:bg-stats={tab.name == selectedTab.name}
-    class="text-center rounded-t"
+    class="cursor-pointer text-center rounded-t"
     on:click={() => (selectedTab = tab)}>
     {tab.name}
   </div>
