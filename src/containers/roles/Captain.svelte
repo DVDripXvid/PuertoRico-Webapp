@@ -87,8 +87,9 @@
   function sendStoreGoods() {
     const action = {};
     storages.forEach(s => {
-      if (s.goodType) return;
-      action[s.id] = s.goodType;
+      if (s.goodType) {
+        action[s.id] = s.goodType;
+      }
     });
     return hub.sendCommand(CommandType.StoreGoods, action);
   }
