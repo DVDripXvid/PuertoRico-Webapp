@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { fly } from "svelte/transition";
+  import { fly, slide } from "svelte/transition";
 
   export let showMessage = false;
   let showMessageInternal = showMessage;
@@ -14,7 +14,7 @@
   });
 </script>
 
-<div class="h-full max-h-screen flex flex-col">
+<div transition:slide  class="h-full max-h-screen flex flex-col">
   <div bind:this={infoBar} class="flex-initial">
     <slot name="infoBar" />
   </div>

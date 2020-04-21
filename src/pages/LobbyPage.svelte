@@ -1,5 +1,6 @@
 <script>
   import { getContext } from "svelte";
+  import { slide } from "svelte/transition";
   import {
     sessionStore,
     lobbyGameStore,
@@ -34,7 +35,7 @@
 </script>
 
 <!--HEADER-->
-<div class="h-full flex flex-col min-h-0">
+<div transition:slide class="h-full flex flex-col min-h-0">
   <div
     class="flex flex-row justify-between bg-cover bg-center"
     style="background-image: url(./img/misc/LobbyHeader.svg)">

@@ -3,6 +3,7 @@
 
   export let building;
   export let selected = false;
+  export let isButton = false;
 
   const dispatch = createEventDispatcher();
 
@@ -36,6 +37,7 @@
 
 <div
   on:click
+  class:cursor-pointer={isButton}
   class:selected
   class:unselected={!selected}
   style={`background: url(${imgUrl})`}>

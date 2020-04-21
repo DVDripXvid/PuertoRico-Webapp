@@ -7,6 +7,12 @@
   import { CommandType } from "../../services/gameHub";
 
   const hub = getContext(gameHubCtx);
+
+  let interactable = false;
+  $: interactable =
+    $currentActionStore.includes(CommandType.TakePlantation) ||
+    $currentActionStore.includes(CommandType.TakeQuarry) ||
+    $currentActionStore.includes(CommandType.TakeRandomPlantation);
 </script>
 
 <Layout
@@ -14,6 +20,7 @@
   let:prop={plantation}>
   {#if plantation.name}
     <Tile
+      isButton={interactable}
       tile={plantation}
       on:click={() => hub.sendCommand(CommandType.TakePlantation, {
           tileIndex: plantation.index
@@ -23,6 +30,7 @@
   {/if}
   <div slot="quarry">
     <Tile
+      isButton={interactable}
       tile={{ name: 'Quarry' }}
       on:click={() => hub.sendCommand(CommandType.TakeQuarry)} />
   </div>

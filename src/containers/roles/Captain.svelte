@@ -36,6 +36,9 @@
 
   $: storages = createStorages($signedInPlayerStore);
 
+  let deliverEnabled = false;
+  $: deliverEnabled = $currentActionStore.includes(CommandType.DeliverGoods);
+
   function createStorages(player) {
     const storages = [
       {
@@ -118,6 +121,7 @@
   <Layout {cargoShips} let:prop={ship}>
     <ShipLayout shipableGoods={ship.shipableGoods} let:prop={good}>
       <Good
+        isButton={deliverEnabled}
         {good}
         on:click={() => hub.sendCommand(CommandType.DeliverGoods, {
             goodType: good.type,

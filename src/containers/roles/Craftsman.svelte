@@ -18,10 +18,14 @@
   $: text = $currentActionStore.includes(CommandType.BonusProduction)
     ? "Select to craft one more"
     : "Nothing to see here :(";
+
+  let interactable = false;
+  $: interactable = $currentActionStore.includes(CommandType.BonusProduction);
 </script>
 
 <Layout {goods} let:prop={good}>
   <Good
+    isButton={interactable}
     {good}
     on:click={() => hub.sendCommand(CommandType.BonusProduction, {
         goodType: good.type
