@@ -79,7 +79,7 @@
       buildings={selectedTab.buildings}
       let:prop={building}>
       <Building
-        isButton={!interactable}
+        isButton={interactable}
         {building}
         on:click={() => onBuildingClick(building)} />
     </svelte:component>
