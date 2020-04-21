@@ -52,7 +52,9 @@
         b.cost -
           Math.min(
             b.maxDiscountByQuarry,
-            discount + player.tiles.filter(t => t.name === "Quarry").length
+            discount +
+              player.tiles.filter(t => t.name === "Quarry" && t.hasWorker)
+                .length
           )
       )
     }));
