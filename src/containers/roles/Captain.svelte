@@ -136,14 +136,12 @@
     </ShipLayout>
 
     <div slot="wharf">
-      {#if hasWorkingBuilding($signedInPlayerStore, 'Wharf')}
-        {#each uniqueTypes as goodType}
-          <UseWharf
-            {goodType}
-            on:click={() => hub.sendCommand(CommandType.UseWharf, {
-                goodType
-              })} />
-        {/each}
+      {#if $currentActionStore.includes(CommandType.UseWharf)}
+        <UseWharf
+          goodTypes={uniqueTypes}
+          on:select={ev => hub.sendCommand(CommandType.UseWharf, {
+              goodType: ev.detail
+            })} />
       {/if}
     </div>
   </Layout>
