@@ -1,0 +1,1 @@
+<div on:click|stopPropagation class="h-full bg-beige">?</div>

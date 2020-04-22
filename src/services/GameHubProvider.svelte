@@ -1,7 +1,10 @@
 <script>
-  import { setContext, onDestroy } from "svelte";
+  import { setContext, onDestroy, createEventDispatcher } from "svelte";
   import GameHub, { EventType } from "./gameHub";
   import { gameHubCtx } from "./contextKeys";
+  import Overlay from "../components/Overlay.svelte";
+  import LoadingScreen from "../components/LoadingScreen.svelte";
+  import GameEndScreen from "../components/GameEndScreen.svelte";
 
   import {
     lobbyGameStore,
@@ -10,44 +13,93 @@
     availableActionTypeStore
   } from "./stores";
 
-  const url = $currentGameStore.endpoint;
+  const dispatch = createEventDispatcher();
+  const minLoadingScreenTime = 2000;
 
-  const hub = new GameHub(url);
+  let gameEnded = false;
+  let results = [];
+
+  let isShowGame = false;
+  let isShowLoading = true;
+  let loadingPromise = new Promise(resolve =>
+    setTimeout(resolve, minLoadingScreenTime)
+  );
+
+  function showLoading() {
+    isShowLoading = true;
+    loadingPromise = new Promise(resolve =>
+      setTimeout(resolve, minLoadingScreenTime)
+    );
+  }
+
+  function hideLoading() {
+    loadingPromise.then(() => {
+      isShowLoading = false;
+    });
+  }
+
+  const hub = new GameHub();
   setContext(gameHubCtx, hub);
-  let ready = false;
-
   onDestroy(() => hub.stop());
 
-  hub.on(EventType.GameChanged, ev => {
-    ready = true;
-    inProgressGameStore.update(games =>
-      games.some(g => g.id === ev.game.id)
-        ? games.map(g => (g.id === ev.game.id ? ev.game : g))
-        : [...games, ev.game]
+  const unsubscribe = currentGameStore.subscribe(game => {
+    if (hub.connection || !game.id || !game.endpoint) return;
+    hub.start(game.endpoint, game.id).catch(() => dispatch("failure"));
+    hub.connection.onreconnecting(showLoading);
+    hub.connection.onreconnected(hideLoading);
+    hub.connection.onclose(() => dispatch("failure"));
+    hub.start;
+
+    hub.on(EventType.GameChanged, ev => {
+      inProgressGameStore.update(games =>
+        games.some(g => g.id === ev.game.id)
+          ? games.map(g => (g.id === ev.game.id ? ev.game : g))
+          : [...games, ev.game]
+      );
+      isShowGame = true;
+      hideLoading();
+      dispatch("ready");
+    });
+
+    hub.on(EventType.AvailableActionTypesChanged, ev => {
+      availableActionTypeStore.update(availableActionTypesMap => ({
+        ...availableActionTypesMap,
+        [ev.gameId]: ev.actionTypes
+      }));
+    });
+
+    hub.on(EventType.GameEnded, ev => {
+      results = ev.results;
+      gameEnded = true;
+
+      inProgressGameStore.update(games =>
+        games.map(g => (g.id === ev.gameId ? { ...g, results } : g))
+      );
+    });
+
+    hub.on(EventType.Error, ev => {
+      console.error(ev);
+    });
+
+    Object.keys(EventType).forEach(k =>
+      hub.connection.on(k, ev => {
+        console.log(k + ": ↴");
+        console.log(ev);
+      })
     );
   });
-
-  hub.on(EventType.AvailableActionTypesChanged, ev => {
-    availableActionTypeStore.update(availableActionTypesMap => ({
-      ...availableActionTypesMap,
-      [ev.gameId]: ev.actionTypes
-    }));
-  });
-
-  hub.on(EventType.Error, ev => {
-    // TODO: notification
-    alert(ev.errorMessage);
-    console.error(ev);
-  });
-
-  Object.keys(EventType).forEach(k =>
-    hub.connection.on(k, ev => {
-      console.log(k + ": ↴");
-      console.log(ev);
-    })
-  );
 </script>
 
-{#if ready}
+{#if isShowGame}
   <slot />
+{/if}
+{#if isShowLoading}
+  <Overlay>
+    <LoadingScreen />
+  </Overlay>
+{/if}
+{#if gameEnded && results.length > 0}
+  <Overlay>
+    <GameEndScreen gameResults={results} />
+  </Overlay>
 {/if}

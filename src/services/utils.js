@@ -1,5 +1,5 @@
 export function hasWorkingBuilding(player, buildingName) {
-    return player.buildings.some(b => b.name === buildingName && b.workCount > 0);
+    return player.buildings.some(b => b.name === buildingName && b.workerCount > 0);
 }
 
 export function removeDuplicates(myArr, prop) {

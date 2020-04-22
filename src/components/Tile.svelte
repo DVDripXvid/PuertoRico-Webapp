@@ -1,6 +1,8 @@
 <script>
   export let tile;
   export let selected = false;
+  export let isButton = false;
+
   $: imgUrl = `./img/tiles/${tile.name}.svg`;
 </script>
 
@@ -22,6 +24,7 @@
 
 <div
   on:click|stopPropagation
+  class:cursor-pointer={isButton}
   class:selected
   class:unselected={!selected}
   style={`background: url(${imgUrl})`}>

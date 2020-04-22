@@ -2,15 +2,14 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { sessionStore } from "./stores";
 
 export default class {
-    constructor(url, waitForResp, logLevel) {
-        this.waitForResp = waitForResp || false;
-        logLevel = logLevel || LogLevel.Information;
+    constructor() {
         this.token = "";
-        this.gameId = "";
-        sessionStore.subscribe(session => {
-            this.token = session.token;
-            this.gameId = session.currentGame;
-        });
+        sessionStore.subscribe(session => (this.token = session.token));
+    }
+
+    start(url, gameId, logLevel){
+        logLevel = logLevel || LogLevel.Information;
+        this.gameId = gameId;
         this.connection = new HubConnectionBuilder()
             .withUrl(url += "?gameId=" + this.gameId, { accessTokenFactory: () => this.token })
             .withAutomaticReconnect()
@@ -18,9 +17,7 @@ export default class {
             .build();
 
         this.start = this.connection.start();
-        this.start.catch(err => console.error(err));
-
-        this.connection.onclose(err => console.error(err));
+        return this.start;
     }
 
     on(eventType, cb) {
@@ -42,9 +39,7 @@ export default class {
 
     async send(methodName, msg) {
         await this.start;
-        return this.waitForResp
-            ? this.connection.invoke(methodName, msg)
-            : this.connection.send(methodName, msg);
+        return this.connection.send(methodName, msg);
     }
 
     stop() {
@@ -56,6 +51,7 @@ export default class {
 export const EventType = {
     GameChanged: "GameChanged",
     AvailableActionTypesChanged: "AvailableActionTypesChanged",
+    GameEnded: "GameEnded",
     Error: "Error",
 };
 

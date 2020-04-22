@@ -2,56 +2,27 @@
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
   import { fly } from "svelte/transition";
-  import sessionStore from "../services/stores.js";
 
   import Overlay from "../components/Overlay.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
 
-  export let gameEndResults = {
-    players: [
-      {
-        userId: "1",
-        username: "Józsika",
-        imageUrl: "",
-        vp: 77
-      },
-      {
-        userId: "2",
-        username: "Józsika",
-        imageUrl: "",
-        vp: 66
-      },
-      {
-        userId: "3",
-        username: "Józsika",
-        imageUrl: "",
-        vp: 56
-      },
-      {
-        userId: "4",
-        username: "Józsika",
-        imageUrl: "",
-        vp: 123
-      },
-      {
-        userId: "5",
-        username: "Józsika",
-        imageUrl: "",
-        vp: 33
-      }
-    ]
-  };
+  export let gameResults;
 
-  gameEndResults.players.sort((a, b) => b.vp - a.vp);
+  let gameEndResults = gameResults.map(gr => ({
+    result: gr.result,
+    ...gr.player
+  }));
+
+  gameEndResults.sort((a, b) => b.result - a.result);
 
   let currentPlayerIndex = 0;
-  let maxVp = gameEndResults.players[0].vp;
+  let maxVp = gameEndResults[0].result;
   let results = [];
 
   let initialPercents = {};
-  gameEndResults.players.forEach(p => (initialPercents[p.userId] = 20));
+  gameEndResults.forEach(r => (initialPercents[r.userId] = 20));
   let initialPoints = {};
-  gameEndResults.players.forEach(p => (initialPoints[p.userId] = 0));
+  gameEndResults.forEach(r => (initialPoints[r.userId] = 0));
 
   let percents = tweened(initialPercents, {
     delay: 500,
@@ -66,18 +37,18 @@
   });
 
   let intervalId = setInterval(() => {
-    let player = gameEndResults.players[currentPlayerIndex];
+    let player = gameEndResults[currentPlayerIndex];
     percents.update(pers => ({
       ...pers,
-      [player.userId]: (player.vp / maxVp) * 100
+      [player.userId]: (player.result / maxVp) * 100
     }));
     points.update(ps => ({
       ...ps,
-      [player.userId]: player.vp
+      [player.userId]: player.result
     }));
     results = [...results, player];
     currentPlayerIndex += 1;
-    if (currentPlayerIndex >= gameEndResults.players.length) {
+    if (currentPlayerIndex >= gameEndResults.length) {
       clearInterval(intervalId);
     }
   }, 2000);
@@ -116,10 +87,10 @@
             text-default">
             {index + 1}.
           </div>
-          <div class={`flex-1 max-w-1/${gameEndResults.players.length * 2}`}>
+          <div class={`flex-1 max-w-1/${gameEndResults.length * 2}`}>
             <PlayerProfile
               username={player.username}
-              imageUrl={player.imageUrl} />
+              imageUrl={player.pictureUrl} />
           </div>
           <div class="flex flex-row flex-initial items-center">
             <div

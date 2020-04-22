@@ -12,7 +12,10 @@
   import { gameHubCtx } from "../../services/contextKeys";
   import { CommandType } from "../../services/gameHub";
 
-  $: buildings = getBuildingsWithDiscount($signedInPlayerStore, $currentGameStore.buildings);
+  $: buildings = getBuildingsWithDiscount(
+    $signedInPlayerStore,
+    $currentGameStore.buildings
+  );
 
   $: tabs = [
     {
@@ -50,11 +53,15 @@
           Math.min(
             b.maxDiscountByQuarry,
             discount +
-              player.tiles.filter(t => t.name === "Quarry").length
+              player.tiles.filter(t => t.name === "Quarry" && t.hasWorker)
+                .length
           )
       )
     }));
   }
+
+  let interactable = false;
+  $: interactable = $currentActionStore.includes(CommandType.Build);
 
   function onBuildingClick(building) {
     hub.sendCommand(CommandType.Build, { buildingIndex: building.index });
@@ -64,7 +71,7 @@
 <Layout {tabs} let:prop={tab}>
   <div
     class:bg-stats={tab.name == selectedTab.name}
-    class="text-center rounded-t"
+    class="cursor-pointer text-center rounded-t"
     on:click={() => (selectedTab = tab)}>
     {tab.name}
   </div>
@@ -73,7 +80,10 @@
       this={selectedTab.layout}
       buildings={selectedTab.buildings}
       let:prop={building}>
-      <Building {building} on:click={() => onBuildingClick(building)} />
+      <Building
+        isButton={interactable}
+        {building}
+        on:click={() => onBuildingClick(building)} />
     </svelte:component>
   </div>
 </Layout>

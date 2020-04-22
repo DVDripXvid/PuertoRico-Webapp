@@ -36,6 +36,9 @@
 
   $: storages = createStorages($signedInPlayerStore);
 
+  let deliverEnabled = false;
+  $: deliverEnabled = $currentActionStore.includes(CommandType.DeliverGoods);
+
   function createStorages(player) {
     const storages = [
       {
@@ -84,8 +87,9 @@
   function sendStoreGoods() {
     const action = {};
     storages.forEach(s => {
-      if (s.goodType) return;
-      action[s.id] = s.goodType;
+      if (s.goodType) {
+        action[s.id] = s.goodType;
+      }
     });
     return hub.sendCommand(CommandType.StoreGoods, action);
   }
@@ -118,6 +122,7 @@
   <Layout {cargoShips} let:prop={ship}>
     <ShipLayout shipableGoods={ship.shipableGoods} let:prop={good}>
       <Good
+        isButton={deliverEnabled}
         {good}
         on:click={() => hub.sendCommand(CommandType.DeliverGoods, {
             goodType: good.type,

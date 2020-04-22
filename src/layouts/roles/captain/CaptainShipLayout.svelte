@@ -8,7 +8,7 @@
   }
 </style>
 
-<div class="h-full flex flex-row">
+<div class="h-full flex flex-row justify-around">
   <div class="flex-auto max-w-ship">
     <slot name="ship" />
   </div>
