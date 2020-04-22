@@ -27,10 +27,9 @@
   $: storable = uniqueTypes.filter(t => !stored.has(t));
 
   $: cargoShips = $currentGameStore.cargoShips.map(s => {
-    const shipableGoods = uniqueGoods;
     return {
       ...s,
-      shipableGoods
+      shipableGoods: uniqueGoods
     };
   });
 
@@ -115,8 +114,11 @@
       </StoreActionsLayout>
     {/if}
     <div slot="action">
-      <button class="p-2 m-2 bg-tobacco border-none hover:bg-coffee text-default"
-       on:click={sendStoreGoods}>Apply selected storing</button>
+      <button
+        class="p-2 m-2 bg-tobacco border-none hover:bg-coffee text-default"
+        on:click={sendStoreGoods}>
+        Apply selected storing
+      </button>
     </div>
   </StorageLayout>
 {:else}

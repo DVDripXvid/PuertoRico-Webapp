@@ -36,12 +36,17 @@
   ];
 
   let selectedTab = {};
+  $: reselectTab(tabs);
 
-  const hub = getContext(gameHubCtx);
+  function reselectTab(tabs) {
+    selectedTab = tabs.find(t => t.name === selectedTab.name) || {};
+  }
 
   onMount(() => {
     selectedTab = tabs[0];
   });
+
+  const hub = getContext(gameHubCtx);
 
   function getBuildingsWithDiscount(player, buildings) {
     let discount = player.hasPrivilege ? 1 : 0;
