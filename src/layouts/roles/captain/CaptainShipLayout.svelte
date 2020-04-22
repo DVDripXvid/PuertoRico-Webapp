@@ -17,7 +17,7 @@
       <slot name="text" />
     </div>
     {#each shipableGoods as good}
-      <div class="flex-initial p-1">
+      <div class="flex-1 p-1">
         <slot prop={good} />
       </div>
     {/each}
