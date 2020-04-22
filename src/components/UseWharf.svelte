@@ -1,7 +1,8 @@
 <script>
-  export let goodType;
+  import { createEventDispatcher } from "svelte";
+  export let goodTypes;
 
-  $: imgUrl = `./img/goods/${goodType}.svg`;
+  const dispatch = createEventDispatcher();
 </script>
 
 <style>
@@ -11,12 +12,12 @@
 </style>
 
 <div class="flex flex-row justify-center">
-  <div class="word">
-    <button on:click>Ship all</button>
-  </div>
-  <div class="word w-6">
-    <img src={imgUrl} alt={goodType} />
-  </div>
+  <div class="word">Ship all</div>
+  {#each goodTypes as goodType}
+    <div class="word w-6 cursor-pointer" on:click={() => dispatch('select', goodType)}>
+      <img src={`./img/goods/${goodType}.svg`} alt={goodType} />
+    </div>
+  {/each}
   <div class="word">using</div>
   <div class="word">your</div>
   <div class="word">wharf</div>
