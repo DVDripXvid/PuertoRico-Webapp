@@ -22,6 +22,7 @@ module.exports = {
       default: '#132b40',
       text: '#c4c6b5',
       'transparent-black': 'rgba(0,0,0,0.5)',
+      'transparent-default': 'rgb(19,43,64,0.5)'
     },
     extend: {
       gridTemplateColumns: {
@@ -49,6 +50,8 @@ module.exports = {
       maxWidth: {
         '1/12': '8.3%',
         '1/10': '10%',
+        '1/8': '12.5%',
+        '1/6': '16.6%',
         '1/5': '20%',
         '1/4': '25%',
         '1/3': '33.3%',
