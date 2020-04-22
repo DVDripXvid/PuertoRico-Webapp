@@ -57,6 +57,7 @@ export default class {
 
 export const EventType = {
     GameCreated: "GameCreated",
+    GameEnded: "GameEnded",
     PlayerJoined: "PlayerJoined",
     PlayerLeft: "PlayerLeft",
     GameStarted: "GameStarted",

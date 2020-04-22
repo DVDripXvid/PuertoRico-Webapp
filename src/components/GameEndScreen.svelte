@@ -6,17 +6,12 @@
   import Overlay from "../components/Overlay.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
 
-  export let gameResults = [];
+  export let gameResults;
 
-  let gameEndResults = flattenResults(gameResults);
-  $: gameEndResults = flattenResults(gameResults);
-
-  function flattenResults(notFlattenedResult) {
-    return gameResults.map(gr => ({
-      result: gr.result,
-      ...gr.player
-    }));
-  }
+  let gameEndResults = gameResults.map(gr => ({
+    result: gr.result,
+    ...gr.player
+  }));
 
   gameEndResults.sort((a, b) => b.result - a.result);
 
@@ -95,7 +90,7 @@
           <div class={`flex-1 max-w-1/${gameEndResults.length * 2}`}>
             <PlayerProfile
               username={player.username}
-              imageUrl={player.imageUrl} />
+              imageUrl={player.pictureUrl} />
           </div>
           <div class="flex flex-row flex-initial items-center">
             <div

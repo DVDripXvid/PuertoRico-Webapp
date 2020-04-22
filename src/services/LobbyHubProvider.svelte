@@ -70,6 +70,12 @@
     );
   });
 
+  hub.on(EventType.GameEnded, ev => {
+    inProgressGameStore.update(games =>
+      games.map(g => (g.id === ev.gameId ? { ...g, results: ev.results } : g))
+    );
+  });
+
   hub.on(EventType.Error, ev => {
     // TODO: notification
     alert(ev.errorMessage);

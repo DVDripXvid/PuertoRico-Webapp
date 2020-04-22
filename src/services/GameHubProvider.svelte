@@ -17,7 +17,7 @@
   const minLoadingScreenTime = 2000;
 
   let gameEnded = false;
-  let results = {};
+  let results = [];
 
   let isShowGame = false;
   let isShowLoading = true;
@@ -69,8 +69,12 @@
     });
 
     hub.on(EventType.GameEnded, ev => {
-      gameEnded = true;
       results = ev.results;
+      gameEnded = true;
+
+      inProgressGameStore.update(games =>
+        games.map(g => (g.id === ev.gameId ? { ...g, results } : g))
+      );
     });
 
     hub.on(EventType.Error, ev => {
@@ -94,8 +98,8 @@
     <LoadingScreen />
   </Overlay>
 {/if}
-{#if gameEnded}
+{#if gameEnded && results.length > 0}
   <Overlay>
-    <GameEndScreen {results} />
+    <GameEndScreen gameResults={results} />
   </Overlay>
 {/if}
