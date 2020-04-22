@@ -12,7 +12,9 @@
 
 <div class="flex flex-row justify-center">
   <div class="word">
-    <button on:click>Ship all</button>
+    <button class="p-2 m-2 bg-tobacco border-none hover:bg-coffee" on:click>
+      Ship all
+    </button>
   </div>
   <div class="word w-6">
     <img src={imgUrl} alt={goodType} />
