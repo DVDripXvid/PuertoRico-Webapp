@@ -1,7 +1,7 @@
 <script>
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
-  import { fly } from "svelte/transition";
+  import { fly, draw } from "svelte/transition";
 
   import Overlay from "../components/Overlay.svelte";
   import PlayerProfile from "../components/PlayerProfile.svelte";
@@ -36,7 +36,7 @@
     easing: cubicInOut
   });
 
-  let intervalId = setInterval(() => {
+  function displayNextPlayerResult() {
     let player = gameEndResults[currentPlayerIndex];
     percents.update(pers => ({
       ...pers,
@@ -51,7 +51,10 @@
     if (currentPlayerIndex >= gameEndResults.length) {
       clearInterval(intervalId);
     }
-  }, 2000);
+  }
+
+  displayNextPlayerResult();
+  let intervalId = setInterval(displayNextPlayerResult, 2000);
 </script>
 
 <style>
@@ -63,9 +66,10 @@
   }
 </style>
 
-<div class="flex flew-row justify-center">
-
-  <div class="flex flex-col max-w-container min-h-container w-full">
+<div class="flex flex-row justify-center">
+  <div
+    class="bg-transparent-default flex flex-col max-w-container min-h-container
+    w-full">
     <div
       class="flex flex-row justify-center items-center mb-p5 text-3xl
       text-center bg-default text-text font-minion font-semibold">
@@ -84,7 +88,7 @@
           in:fly={{ y: 400, duration: 700 }}>
           <div
             class="flex-initial mx-p5 text-3xl font-minion font-semibold
-            text-default">
+            text-text">
             {index + 1}.
           </div>
           <div class={`flex-1 max-w-1/${gameEndResults.length * 2}`}>
@@ -95,7 +99,7 @@
           <div class="flex flex-row flex-initial items-center">
             <div
               class="w-16 text-center ml-p20 mr-p2 text-3xl font-minion
-              font-semibold text-default">
+              font-semibold text-text">
               {Math.round($points[player.userId])}
             </div>
             <div class="flex-initial ">
@@ -109,7 +113,8 @@
             <div
               class="flex flex-row justify-end"
               style={`width: ${$percents[player.userId]}%`}>
-              <div class="min-w-6 p-p2">
+              <div class="flex-auto bg-no-repeat bg-cover" style="background-image: url(img/misc/Wave.svg)" />
+              <div class="flex-initial min-w-6 p-p2">
                 <img src="img/misc/ShipR.svg" alt="*" />
               </div>
             </div>
@@ -119,5 +124,4 @@
 
     </div>
   </div>
-
 </div>

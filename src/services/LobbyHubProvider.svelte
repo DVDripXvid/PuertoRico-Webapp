@@ -35,7 +35,7 @@
     lobbyGameStore.update(games => games.filter(g => g.id !== ev.game.id));
     inProgressGameStore.update(games =>
       games.some(g => g.id === ev.game.id)
-        ? games.map(g => (g.id === ev.game.id ? ev.game : g))
+        ? games.map(g => (g.id === ev.game.id ? { ...ev.game, ...g } : g))
         : [...games, ev.game]
     );
   });

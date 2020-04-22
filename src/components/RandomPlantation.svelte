@@ -1,1 +1,3 @@
-<div on:click|stopPropagation class="h-full bg-beige">?</div>
+<div on:click|stopPropagation class="h-full cursor-pointer">
+  <img src="img/misc/HaciendaTile.svg" alt="Hacienda" />
+</div>

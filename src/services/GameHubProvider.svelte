@@ -16,7 +16,7 @@
   const dispatch = createEventDispatcher();
   const minLoadingScreenTime = 2000;
 
-  let gameEnded = false;
+  let showResults = false;
   let results = [];
 
   let isShowGame = false;
@@ -70,7 +70,7 @@
 
     hub.on(EventType.GameEnded, ev => {
       results = ev.results;
-      gameEnded = true;
+      showResults = true;
 
       inProgressGameStore.update(games =>
         games.map(g => (g.id === ev.gameId ? { ...g, results } : g))
@@ -98,8 +98,8 @@
     <LoadingScreen />
   </Overlay>
 {/if}
-{#if gameEnded && results.length > 0}
-  <Overlay>
+{#if showResults && results.length > 0}
+  <Overlay on:cancel={() => (showResults = false)}>
     <GameEndScreen gameResults={results} />
   </Overlay>
 {/if}

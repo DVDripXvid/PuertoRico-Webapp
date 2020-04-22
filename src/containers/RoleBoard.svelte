@@ -7,6 +7,7 @@
   import Settler from "./roles/Settler.svelte";
   import Trader from "./roles/Trader.svelte";
   import RoleTab from "../components/RoleTab.svelte";
+  import RoleHeader from "../components/RoleHeader.svelte";
   import { currentGameStore } from "../services/stores";
 
   let tabs = [
@@ -46,7 +47,9 @@
     {#if selectedTab !== tab}
       <RoleTab name={tab.name} on:click={() => (selectedTab = tab)} />
     {/if}
-    <div class="h-10" slot="roleHeader">{selectedTab.name}</div>
+    <div slot="roleHeader">
+      <RoleHeader roleName={selectedTab.name} />
+    </div>
     <div class="h-full" slot="roleContent">
       <svelte:component this={selectedTab.component} />
     </div>

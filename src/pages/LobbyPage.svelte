@@ -131,7 +131,7 @@
                 </button>
               {:else}
                 <button
-                  on:click|stopPropagation={() => results = game.results}
+                  on:click|stopPropagation={() => (results = game.results)}
                   class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
                   Results
                 </button>
@@ -151,8 +151,8 @@
       <img src="img/misc/ShipL.svg" alt="*" />
     </div>
     <div
-      class="cursor-pointer w-1/6 p-p2 transform min-w-12 transition-all duration-500 scale-90
-      hover:scale-100"
+      class="cursor-pointer w-1/6 p-p2 transform min-w-12 transition-all
+      duration-500 scale-90 hover:scale-100"
       on:click|stopPropagation={() => hub.createGame($sessionStore.name + "'s game")}>
       <img src="img/misc/NewGameButton.svg" alt="New Game" />
     </div>
@@ -165,7 +165,7 @@
 </div>
 
 {#if results && results.length > 0}
-  <Overlay>
+  <Overlay on:cancel={() => (results = null)}>
     <GameEndScreen gameResults={results} />
   </Overlay>
 {/if}
