@@ -115,7 +115,7 @@
       </StoreActionsLayout>
     {/if}
     <div slot="action">
-      <button class="p-2 m-2 bg-tobacco border-none hover:bg-coffee"
+      <button class="p-2 m-2 bg-tobacco border-none hover:bg-coffee text-default"
        on:click={sendStoreGoods}>Apply selected storing</button>
     </div>
   </StorageLayout>

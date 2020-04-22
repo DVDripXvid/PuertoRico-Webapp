@@ -12,10 +12,11 @@
   }
 </style>
 
-<div class="flex flex-row justify-center">
+<div class="flex flex-row justify-center items-center">
   <div class="word">
-    <button on:click>Remove {capacity}</button>
+    <button class="p-1 bg-tobacco text-default border-none hover:bg-coffee" on:click>Remove</button>
   </div>
+  <div class="word">{capacity}</div>
   <div class="word w-6">
     <img src={imgUrl} alt={goodType} />
   </div>

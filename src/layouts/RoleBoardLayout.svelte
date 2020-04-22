@@ -14,7 +14,7 @@
   </div>
 
   <div class="flex-auto p-2 flex flex-col">
-    <div class="flex-initial">
+    <div class="flex-initial mb-2">
       <slot name="roleHeader" />
     </div>
     <div class="flex-auto">
