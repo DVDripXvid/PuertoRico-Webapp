@@ -29,9 +29,14 @@
   $: cargoShips = $currentGameStore.cargoShips.map(s => {
     return {
       ...s,
-      shipableGoods: uniqueGoods
+      shipableGoods:
+        s.goodType && s.goodCount > 0
+          ? uniqueGoods.filter(g => g.type === s.goodType)
+          : uniqueGoods
     };
   });
+
+  $: console.log(cargoShips);
 
   $: storages = createStorages($signedInPlayerStore);
 
