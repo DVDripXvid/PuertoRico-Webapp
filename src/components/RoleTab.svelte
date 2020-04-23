@@ -1,6 +1,4 @@
 <script>
-  import RandomColor from "./RandomColor.svelte";
-
   export let name;
 </script>
 

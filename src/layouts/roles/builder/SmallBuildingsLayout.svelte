@@ -2,7 +2,6 @@
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
   import { fade } from "svelte/transition";
-  import RandomColor from "../../../components/RandomColor.svelte";
   import { removeDuplicates } from "../../../services/utils";
 
   export let buildings = [];
@@ -29,9 +28,7 @@
           class="flex-1"
           animate:flip={{ duration: 300, easing: quintOut }}
           transition:fade|local={{ duration: 300 }}>
-          <slot prop={building}>
-            <RandomColor />
-          </slot>
+          <slot prop={building} />
         </div>
       {/each}
     </div>

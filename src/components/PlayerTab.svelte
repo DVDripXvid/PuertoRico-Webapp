@@ -1,6 +1,5 @@
 <script>
   import PlayerProfile from "./PlayerProfile.svelte";
-  import RandomColor from "./RandomColor.svelte";
 
   export let username;
   export let imageUrl;

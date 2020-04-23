@@ -1,6 +1,4 @@
 <script>
-  import RandomColor from "../../components/RandomColor.svelte";
-
   export let tiles = [];
 
   const columnCount = 4;
@@ -26,9 +24,7 @@
   {#each tilesGrid as row}
     {#each row as tile}
       <div class="row-auto col-auto m-p2">
-        <slot prop={tile}>
-          <RandomColor />
-        </slot>
+        <slot prop={tile} />
       </div>
     {/each}
   {/each}

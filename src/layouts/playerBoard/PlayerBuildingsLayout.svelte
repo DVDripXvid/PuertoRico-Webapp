@@ -1,6 +1,4 @@
 <script>
-  import RandomColor from "../../components/RandomColor.svelte";
-
   export let buildings = [];
 
   const columnCount = 4;
@@ -38,9 +36,7 @@
         class:row-start-1={building.type === 'Large'}
         class:row-end-3={building.type === 'Large'}
         class="m-p2 max-w-building">
-        <slot prop={building}>
-          <RandomColor />
-        </slot>
+        <slot prop={building} />
       </div>
     {/each}
   {/each}
