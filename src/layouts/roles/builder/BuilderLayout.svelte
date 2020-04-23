@@ -1,6 +1,4 @@
 <script>
-  import RandomColor from "../../../components/RandomColor.svelte";
-
   export let tabs = [];
 </script>
 
@@ -13,8 +11,6 @@
     {/each}
   </div>
   <div class="flex-auto">
-    <slot name="content">
-      <RandomColor />
-    </slot>
+    <slot name="content" />
   </div>
 </div>
