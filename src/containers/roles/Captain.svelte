@@ -36,8 +36,6 @@
     };
   });
 
-  $: console.log(cargoShips);
-
   $: storages = createStorages($signedInPlayerStore);
 
   let deliverEnabled = false;
