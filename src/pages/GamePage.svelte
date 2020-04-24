@@ -49,7 +49,7 @@
         <Button
           on:click={() => sessionStore.update(s => ({ ...s, showLobby: true }))}
           iconUrl="img/misc/ToLobbyIcon.svg"
-          text="To Lobby" />
+          text="Lobby" />
       </div>
       <div class="h-full" slot="actionRight">
         {#if $currentActionStore.includes(CommandType.EndPhase)}

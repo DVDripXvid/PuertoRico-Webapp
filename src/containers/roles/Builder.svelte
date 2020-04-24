@@ -76,7 +76,9 @@
 <Layout {tabs} let:prop={tab}>
   <div
     class:bg-stats={tab.name == selectedTab.name}
-    class="cursor-pointer text-center rounded-t"
+    class:text-default={tab.name == selectedTab.name}
+    class:text-text={tab.name !== selectedTab.name}
+    class="cursor-pointer text-center rounded-t font-minion"
     on:click={() => (selectedTab = tab)}>
     {tab.name}
   </div>

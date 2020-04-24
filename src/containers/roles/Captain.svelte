@@ -17,6 +17,7 @@
   import { gameHubCtx } from "../../services/contextKeys";
   import { CommandType } from "../../services/gameHub";
   import { removeDuplicates, hasWorkingBuilding } from "../../services/utils";
+  import Text from "../../components/RolesideText.svelte";
 
   const hub = getContext(gameHubCtx);
 
@@ -134,7 +135,9 @@
             goodType: good.type,
             shipCapacity: ship.capacity
           })} />
-      <div slot="text">Ship</div>
+      <div slot="text">
+      <Text text="Ship"/>
+      </div>
       <div class="h-full" slot="ship">
         <CargoShip {ship} />
       </div>
