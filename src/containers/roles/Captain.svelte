@@ -136,7 +136,7 @@
             shipCapacity: ship.capacity
           })} />
       <div slot="text">
-      <Text text="Ship"/>
+        <Text text="Ship" />
       </div>
       <div class="h-full" slot="ship">
         <CargoShip {ship} />

@@ -15,9 +15,28 @@ export default class {
             .build();
 
         this.start = this.connection.start();
-        this.start.catch(err => console.error(err));
+    }
 
-        this.connection.onclose(err => console.error(err));
+    restart() {
+        if (typeof (this.onreconnectingCb) === "function") {
+            this.onreconnectingCb();
+        }
+        this.start = this.connection.start().then(() => {
+            if (typeof (this.onreconnectedCb) === "function") {
+                this.onreconnectedCb();
+            }
+        });
+        return this.start;
+    }
+
+    onreconnecting(cb) {
+        this.onreconnectingCb = cb;
+        this.connection.onreconnecting(cb);
+    }
+
+    onreconnected(cb) {
+        this.onreconnectedCb = cb;
+        this.connection.onreconnected(cb);
     }
 
     on(eventType, cb) {

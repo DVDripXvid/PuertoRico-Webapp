@@ -42,7 +42,7 @@
   setContext(gameHubCtx, hub);
   onDestroy(() => hub.stop());
 
-  const unsubscribe = currentGameStore.subscribe(game => {
+  currentGameStore.subscribe(game => {
     if (hub.connection || !game.id || !game.endpoint) return;
     hub.start(game.endpoint, game.id).catch(() => dispatch("failure"));
     hub.connection.onreconnecting(showLoading);
