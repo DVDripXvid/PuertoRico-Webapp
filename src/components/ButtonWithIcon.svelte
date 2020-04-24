@@ -6,6 +6,9 @@
 
   let element;
 
+  let paddingClass = reverse ? "pl-2" : "pr-2";
+
+  
   onMount(() => {
     element.style.width = element.offsetHeight + "px";
   });
@@ -19,7 +22,9 @@
     bind:this={element}
     class="flex-initial h-full bg-cover"
     style={`background-image: url(${iconUrl})`} />
-  <div class="p-1 flex-initial">
-    <button class="border-none">{text}</button>
+  <div class={`${paddingClass} p-1 flex-initial`}>
+    <button class="border-none font-minion text-default font-semibold">
+      {text}
+    </button>
   </div>
 </div>

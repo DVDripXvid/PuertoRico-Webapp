@@ -8,6 +8,7 @@
   import { getContext } from "svelte";
   import { gameHubCtx } from "../../services/contextKeys";
   import { CommandType } from "../../services/gameHub";
+  import Text from "../../components/RolesideText.svelte";
 
   const hub = getContext(gameHubCtx);
 
@@ -17,7 +18,7 @@
 
   $: text = $currentActionStore.includes(CommandType.BonusProduction)
     ? "Select to craft one more"
-    : "Nothing to see here :(";
+    : "Your workers are eager to craft some goods. Give them some work to do!";
 
   let interactable = false;
   $: interactable = $currentActionStore.includes(CommandType.BonusProduction);
@@ -30,5 +31,7 @@
     on:click={() => hub.sendCommand(CommandType.BonusProduction, {
         goodType: good.type
       })} />
-  <div slot="text">{text}</div>
+  <div slot="text">
+    <Text {text} />
+  </div>
 </Layout>

@@ -65,7 +65,7 @@
   ];
 </script>
 
-<div class="h-full flex flex-row justify-between">
+<div class="h-full flex flex-row justify-around">
   {#each items as item}
     <div class="flex-initial flex flex-row items-center my-1">
       <div class="flex-initial w-6 mx-1 mr-1">
