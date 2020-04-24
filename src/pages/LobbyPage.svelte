@@ -18,8 +18,8 @@
   const hub = getContext(lobbyHubCtx);
   let isLoading = !hub.connection.connectionStarted;
   hub.start.then(() => (isLoading = false));
-  hub.connection.onreconnecting(() => (isLoading = true));
-  hub.connection.onreconnected(() => (isLoading = false));
+  hub.onreconnecting(() => (isLoading = true));
+  hub.onreconnected(() => (isLoading = false));
 
   function isJoined(game) {
     const userId = $sessionStore.id;

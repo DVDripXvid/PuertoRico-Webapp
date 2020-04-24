@@ -2,6 +2,9 @@
   import { setContext, onDestroy } from "svelte";
   import lobbyHub, { EventType } from "./lobbyHub";
   import { lobbyHubCtx } from "./contextKeys";
+  import { signIn } from "../auth/GoogleSignIn.svelte";
+  import Overlay from "../components/Overlay.svelte";
+  import SessionExpiredScreen from "../components/SessionExpiredScreen.svelte";
 
   import {
     lobbyGameStore,
@@ -10,11 +13,25 @@
   } from "./stores";
 
   export let url;
+  let showSessionExpired = false;
 
   const hub = new lobbyHub(url);
+  hub.start.catch(err => {
+    console.error(err);
+    if (err.message === "Unauthorized") {
+      showSessionExpired = true;
+    }
+  });
   setContext(lobbyHubCtx, hub);
 
   onDestroy(() => hub.stop());
+
+  function refresh() {
+    signIn().then(() => {
+      showSessionExpired = false;
+      hub.restart();
+    });
+  }
 
   hub.on(EventType.GameCreated, ev => {
     lobbyGameStore.update(games =>
@@ -91,3 +108,8 @@
 </script>
 
 <slot />
+{#if showSessionExpired}
+  <Overlay>
+    <SessionExpiredScreen on:click={refresh} />
+  </Overlay>
+{/if}
