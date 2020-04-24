@@ -25,21 +25,7 @@
 <script>
   import { sessionStore } from "../services/stores";
 
-  window.onGoogleSignIn = googleUser => {
-    // updateSession(googleUser);
-    const profile = googleUser.getBasicProfile();
-    const resp = googleUser.getAuthResponse();
-    const session = {
-      token: resp.id_token + "hahaha",
-      name: profile.getName(),
-      email: profile.getEmail(),
-      imageUrl: profile.getImageUrl() + "?sz=512",
-      id: profile.getId(),
-      showLobby: true
-    };
-    sessionStore.set(session);
-    // window.gapi.auth2.getAuthInstance().currentUser.listen(updateSession);
-  };
+  window.onGoogleSignIn = updateSession;
 </script>
 
 <div class="g-signin2" data-onsuccess="onGoogleSignIn" />
