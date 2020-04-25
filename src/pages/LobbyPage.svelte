@@ -113,7 +113,7 @@
         <img src="img/misc/LaunchGame.svg" alt="launch" />
       </div>
       <div class="h-full flex flex-col overflow-y-auto p-p2">
-        {#each $inProgressGameStore as game}
+        {#each $inProgressGameStore.reverse() as game}
           <div class="flex flex-row flex-start bg-default rounded-lg m-p1 p-p2">
             {#each game.players as player}
               <div class="flex-auto min-w-3 text-sugar p-p2">
