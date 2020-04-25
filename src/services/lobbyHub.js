@@ -1,4 +1,4 @@
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { HubConnectionBuilder, LogLevel, HubConnectionState } from "@microsoft/signalr";
 import { sessionStore } from "./stores";
 
 export default class {
@@ -18,6 +18,9 @@ export default class {
     }
 
     restart() {
+        if (this.connection.state !== HubConnectionState.Disconnected) {
+            return;
+        }
         if (typeof (this.onreconnectingCb) === "function") {
             this.onreconnectingCb();
         }

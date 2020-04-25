@@ -22,6 +22,11 @@
       showSessionExpired = true;
     }
   });
+  hub.connection.onclose(err => {
+    if (err && err.message === "Unauthorized") {
+      showSessionExpired = true;
+    }
+  });
   setContext(lobbyHubCtx, hub);
 
   onDestroy(() => hub.stop());
