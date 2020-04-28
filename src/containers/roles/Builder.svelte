@@ -78,7 +78,7 @@
     class:bg-stats={tab.name == selectedTab.name}
     class:text-default={tab.name == selectedTab.name}
     class:text-text={tab.name !== selectedTab.name}
-    class="cursor-pointer text-center rounded-t font-minion"
+    class="cursor-pointer text-center rounded-t font-minion font-semibold py-1"
     on:click={() => (selectedTab = tab)}>
     {tab.name}
   </div>
