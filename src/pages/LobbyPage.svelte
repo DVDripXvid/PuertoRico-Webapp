@@ -110,7 +110,7 @@
     <!--LAUNCH GAME-->
     <div class="flex-1 flex flex-col border-2 border-primary min-h-0">
       <div>
-        <img src="img/misc/LaunchGame.svg" alt="launch" />
+        <img src="img/misc/YourGames.svg" alt="launch" />
       </div>
       <div class="h-full flex flex-col overflow-y-auto p-p2">
         {#each $inProgressGameStore.reverse() as game}

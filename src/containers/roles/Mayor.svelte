@@ -8,7 +8,7 @@
 </script>
 
 <div>
-  <div class="h-full p-4">
+  <div class="h-full max-w-3/4 p-4 m-auto">
     <img src="img/misc/MayorShip.svg" alt="" />
   </div>
   {#if mayorPlayer && $currentGameStore.currentRole && $currentGameStore.currentRole.name === 'Mayor'}
