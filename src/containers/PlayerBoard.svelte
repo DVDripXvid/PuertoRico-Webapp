@@ -14,6 +14,7 @@
   import {
     currentGameStore,
     currentActionStore,
+    signedInPlayerStore,
     sessionStore
   } from "../services/stores";
 
@@ -28,8 +29,9 @@
   );
 
   $: interactable =
-    $currentActionStore.includes(CommandType.MoveColonist) ||
-    $currentActionStore.includes(CommandType.PlaceColonist);
+    selectedPlayer.userId === $signedInPlayerStore.userId &&
+    ($currentActionStore.includes(CommandType.MoveColonist) ||
+      $currentActionStore.includes(CommandType.PlaceColonist));
 
   let selectedBuildingIndex = NaN;
   let selectedTileIndex = NaN;
@@ -153,6 +155,8 @@
         <PlayerTab
           on:click={() => (selectedPlayer = player)}
           isCurrent={$currentGameStore.currentPlayer.userId === player.userId}
+          isSignedIn={$signedInPlayerStore.userId === player.userId}
+          isSelected={selectedPlayer.userId === player.userId}
           username={player.username}
           imageUrl={getImageUrl(player)} />
       </PlayerTabsLayout>
