@@ -35,6 +35,8 @@
   }
 
   let results = null;
+
+  $: sortedGames = $inProgressGameStore.slice().reverse();
 </script>
 
 <!--HEADER-->
@@ -113,7 +115,7 @@
         <img src="img/misc/YourGames.svg" alt="launch" />
       </div>
       <div class="h-full flex flex-col overflow-y-auto p-p2">
-        {#each $inProgressGameStore.reverse() as game}
+        {#each sortedGames as game}
           <div class="flex flex-row flex-start bg-default rounded-lg m-p1 p-p2">
             {#each game.players as player}
               <div class="flex-auto min-w-3 text-sugar p-p2">
