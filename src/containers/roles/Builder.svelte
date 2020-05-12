@@ -87,10 +87,7 @@
       this={selectedTab.layout}
       buildings={selectedTab.buildings}
       let:prop={building}>
-      <Building
-        isButton={interactable}
-        {building}
-        on:click={() => onBuildingClick(building)} />
+      <Building {building} on:click={() => onBuildingClick(building)} />
     </svelte:component>
   </div>
 </Layout>
