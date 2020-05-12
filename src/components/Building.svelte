@@ -3,7 +3,6 @@
 
   export let building;
   export let selected = false;
-  export let isButton = false;
   export let isSlotButton = false;
 
   const dispatch = createEventDispatcher();
@@ -38,9 +37,9 @@
 
 <div
   on:click
-  class:cursor-pointer={isButton}
   class:selected
   class:unselected={!selected}
+  class="cursor-pointer"
   style={`background: url(${imgUrl})`}>
   <svg {viewBox}>
     <circle
