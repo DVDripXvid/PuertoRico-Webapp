@@ -12,9 +12,13 @@
   let takePlantationEnabled = false;
   let takeQuarryEnabled = false;
   let takeRandomPlantationEnabled = false;
-  $: takePlantationEnabled = $currentActionStore.includes(CommandType.TakePlantation);
+  $: takePlantationEnabled = $currentActionStore.includes(
+    CommandType.TakePlantation
+  );
   $: takeQuarryEnabled = $currentActionStore.includes(CommandType.TakeQuarry);
-  $: takeRandomPlantationEnabled = $currentActionStore.includes(CommandType.TakeRandomPlantation);
+  $: takeRandomPlantationEnabled = $currentActionStore.includes(
+    CommandType.TakeRandomPlantation
+  );
 </script>
 
 <Layout
@@ -37,9 +41,14 @@
     {/if}
   </div>
   <div slot="quarry">
-    <Tile
-      isButton={takeQuarryEnabled}
-      tile={{ name: 'Quarry' }}
-      on:click={() => hub.sendCommand(CommandType.TakeQuarry)} />
+    {#if $currentGameStore.quarryCount > 0}
+      <Tile
+        isButton={takeQuarryEnabled}
+        tile={{ name: 'Quarry' }}
+        on:click={() => hub.sendCommand(CommandType.TakeQuarry)} />
+    {/if}
+  </div>
+  <div slot="quarryCount">
+    {$currentGameStore.quarryCount > 0 ? `Left: ${$currentGameStore.quarryCount}` : ''}
   </div>
 </Layout>

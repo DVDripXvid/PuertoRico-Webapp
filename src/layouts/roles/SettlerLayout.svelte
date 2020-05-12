@@ -19,6 +19,10 @@
     <slot name="quarry" />
   </div>
   <div class="flex-1/3 p-p2 max-w-tile">
-     <slot name="hacienda" />
+    <slot name="hacienda" />
+  </div>
+  <div class="flex-break" />
+  <div class="flex-1/3 px-p2 text-center max-w-tile">
+    <slot name="quarryCount" />
   </div>
 </div>
