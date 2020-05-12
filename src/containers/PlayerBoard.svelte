@@ -9,8 +9,11 @@
   import PlayerStats from "../components/PlayerStats.svelte";
   import Tile from "../components/Tile.svelte";
   import Building from "../components/Building.svelte";
+  import Overlay from "../components/Overlay.svelte";
+  import BuildingDetails from "../components/BuildingDetails.svelte";
   import { gameHubCtx } from "../services/contextKeys";
   import { CommandType } from "../services/gameHub";
+  import { buildingDescriptions } from "../data/descriptions";
   import {
     currentGameStore,
     currentActionStore,
@@ -19,6 +22,8 @@
   } from "../services/stores";
 
   const hub = getContext(gameHubCtx);
+
+  let buildingToShow;
 
   let selectedPlayer = $currentGameStore.players.find(
     p => p.userId === $sessionStore.id
@@ -140,6 +145,7 @@
         let:prop={building}>
         {#if building.name}
           <Building
+            on:click={() => (buildingToShow = building)}
             isSlotButton={interactable}
             selected={building.index === selectedBuildingIndex}
             {building}
@@ -170,3 +176,11 @@
     </div>
   </Layout>
 </div>
+
+{#if buildingToShow}
+  <Overlay on:cancel={() => (buildingToShow = null)}>
+    <BuildingDetails
+      name={buildingToShow.name}
+      description={buildingDescriptions[buildingToShow.name]} />
+  </Overlay>
+{/if}
