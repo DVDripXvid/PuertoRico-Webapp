@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
-	<meta name="google-signin-client_id" content="178792157062-b5jtd265enrjn20s04hqtfntm9esshrf.apps.googleusercontent.com">
+	<meta name="google-signin-client_id"
+		content="178792157062-b5jtd265enrjn20s04hqtfntm9esshrf.apps.googleusercontent.com">
 
 	<title>Puerto Rico</title>
 
+	<link rel="manifest" href="/manifest.json">
 	<link rel='icon' type='image/svg' href='/favicon.svg'>
 	<link rel='stylesheet' href='/global.css'>
 	<link rel='stylesheet' href='/build/bundle.css'>
 
+	<script>
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/service-worker.js')
+				.then(function (registration) {
+					console.log('Registration successful, scope is:', registration.scope);
+				})
+				.catch(function (error) {
+					console.log('Service worker registration failed, error:', error);
+				});
+		}
+	</script>
 	<script src="https://apis.google.com/js/platform.js"></script>
 	<script defer src='/build/bundle.js'></script>
 </head>
 
 <body>
 </body>
+
 </html>
