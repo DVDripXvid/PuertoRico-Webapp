@@ -12,11 +12,13 @@ pool:
 steps:
 
 - task: Npm@1
+  displayName: 'npm install'
   inputs:
     command: 'install'
     workingDir: '$(Build.SourcesDirectory)'
 
 - task: Npm@1
+  displayName: 'npm run build'
   inputs:
     command: 'custom'
     customCommand: 'run build'
