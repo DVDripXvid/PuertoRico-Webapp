@@ -131,7 +131,7 @@
                   class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
                   Launch
                 </button>
-              {:else}
+              {:else if game.status === 'ENDED'}
                 <button
                   on:click|stopPropagation={() => (results = game.results)}
                   class="p-2 m-2 bg-tobacco border-none hover:bg-coffee">
