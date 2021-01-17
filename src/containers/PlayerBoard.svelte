@@ -1,5 +1,6 @@
 <script>
   import { getContext } from "svelte";
+  import { _ } from 'svelte-i18n';
   import Layout from "../layouts/PlayerBoardLayout.svelte";
   import PlayerTilesLayout from "../layouts/playerBoard/PlayerTilesLayout.svelte";
   import PlayerBuildingsLayout from "../layouts/playerBoard/PlayerBuildingsLayout.svelte";
@@ -13,7 +14,6 @@
   import BuildingDetails from "../components/BuildingDetails.svelte";
   import { gameHubCtx } from "../services/contextKeys";
   import { CommandType } from "../services/gameHub";
-  import { buildingDescriptions } from "../data/descriptions";
   import {
     currentGameStore,
     currentActionStore,
@@ -180,7 +180,7 @@
 {#if buildingToShow}
   <Overlay on:cancel={() => (buildingToShow = null)}>
     <BuildingDetails
-      name={buildingToShow.name}
-      description={buildingDescriptions[buildingToShow.name]} />
+      name={$_(`buildings.${buildingToShow.name}.name`)}
+      description={$_(`buildings.${buildingToShow.name}.description`)} />
   </Overlay>
 {/if}
